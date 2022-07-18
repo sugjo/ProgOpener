@@ -1,0 +1,35 @@
+{
+	"name": "progopener",
+	"version": "0.0.1",
+	"main": "src/electron.cjs",
+	"scripts": {
+		"dev": "vite dev",
+		"preview": "vite preview",
+		"electron": "concurrently --kill-others \"vite dev --port 3000\" \"electron src/electron.cjs\"",
+		"build": "vite build",
+		"dev:package": "npm run build && electron-builder --config electron-builder.config.json --dir",
+		"package": "npm run build && electron-builder --config electron-builder.config.json",
+		"lint": "prettier --check --plugin-search-dir=. .",
+		"format": "prettier --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-static": "^1.0.0-next.37",
+		"@sveltejs/kit": "next",
+		"concurrently": "^7.2.2",
+		"electron": "^19.0.8",
+		"electron-builder": "^23.1.0",
+		"electron-reloader": "^1.2.3",
+		"prettier": "^2.6.2",
+		"prettier-plugin-svelte": "^2.7.0",
+		"svelte": "^3.44.0",
+		"svelte-check": "^2.7.1",
+		"typescript": "^4.7.4",
+		"vite": "^3.0.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"electron-serve": "^1.1.0",
+		"electron-window-state": "^5.0.3"
+	}
+}
