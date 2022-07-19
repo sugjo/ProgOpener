@@ -37,6 +37,7 @@ function createMainWindow() {
 
     webPreferences: {
       devTools: isdev,
+      enableRemoteModule: true,
       preload: path.join(__dirname, "preload.cjs")
     }
   });
@@ -72,6 +73,7 @@ function settings() {
 
   settingsWindow = new BrowserWindow({
     webPreferences: {
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.cjs'),
     },
   });
