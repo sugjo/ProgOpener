@@ -30,6 +30,10 @@
 	"type": "module",
 	"dependencies": {
 		"electron-serve": "^1.1.0",
-		"electron-window-state": "^5.0.3"
+		"electron-window-state": "^5.0.3",
+		"emulate-key-in-browser": "^1.0.0-rc.1",
+		"extract-file-icon": "^0.3.2",
+		"mz": "^2.7.0",
+		"svelte-local-storage-store": "^0.2.6"
 	}
 }
