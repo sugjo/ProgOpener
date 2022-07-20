@@ -7,11 +7,11 @@ try { require("electron-reloader")(module); } catch { }
 const loadURL = serve({ directory: "." });
 const port = process.env.PORT || 3000;
 const isdev = !app.isPackaged || (process.env.NODE_ENV == "development");
-let mainwindow;
+let mainWindow;
 let settingsWindow;
 
 function loadVite(port) {
-  mainwindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
+  mainWindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
     setTimeout(() => { loadVite(port); }, 200);
   });
 }
@@ -21,7 +21,7 @@ function createMainWindow() {
   let isShowing = false;
 
 
-  mainwindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     show: false,
     alwaysOnTop: true,
     resizable: false,
@@ -47,33 +47,31 @@ function createMainWindow() {
   })
 
   ipcMain.on("hide", hide);
+  mainWindow.on("blur", hide)
 
   function hide() {
-    mainwindow.webContents.send('hide');
-    mainwindow.hide();
+    mainWindow.webContents.send('hide');
+    mainWindow.hide();
     isShowing = false;
   }
 
   function show() {
-    mainwindow.webContents.send('show');
-    mainwindow.show()
+    mainWindow.webContents.send('show');
+    mainWindow.show()
     isShowing = true;
   }
 
-  mainwindow.once("close", () => { mainwindow = null; });
-
-  if (!isdev) mainwindow.removeMenu();
-  else mainwindow.webContents.openDevTools();
+  mainWindow.once("close", () => { mainWindow = null; });
 
   if (isdev) loadVite(port);
-  else loadURL(mainwindow);
+  else loadURL(mainWindow);
 }
 
-function settings() {
+function createSettingsWindow() {
 
   settingsWindow = new BrowserWindow({
     webPreferences: {
-      // enableRemoteModule: true,
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.cjs'),
     },
   });
@@ -81,7 +79,8 @@ function settings() {
   settingsWindow.loadURL(`http://127.0.0.1:${port}/test`);
 }
 
-ipcMain.on("openSettings", settings);
+ipcMain.on("openSettings", createSettingsWindow);
+
 app.once("ready", createMainWindow);
 app.on("activate", () => { if (!mainwindow) createMainWindow(); });
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });

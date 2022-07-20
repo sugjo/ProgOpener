@@ -5,6 +5,7 @@
 	import { fly } from 'svelte/transition';
 	import { settings } from '../store/settings';
 	import { browser } from '$app/env';
+	import clickOutside from "$lib/utils/clickOutside"
 
 	let isLoad = false;
 	let inputElement;
@@ -47,17 +48,17 @@
 
 	const openHandler = (name, path) => {
 		browser && window.api.hide();
-		browser && window.api.exec(`${path}\\${name}`);
+		browser && window.api.exec(`"${path}\\${name}"`);
 	};
 
 	$: searchResult = search(searchStr, files);
 </script>
 
-<main on:click|stopPropagation class={isLoad ? '' : 'loading'}>
+<main on:click|stopPropagation use:clickOutside={window.api.hide} class={isLoad ? '' : 'loading'}>
 	<input bind:this={inputElement} type="text" bind:value={searchStr} />
 	<span
 		class="material-symbols-outlined btn"
-		on:click={() => browser && window.api.sendMsg('settings')}
+		on:click={() => browser && window.api.send('openSettings')}
 	>
 		more_horiz
 	</span>
@@ -73,7 +74,7 @@
 	{/if}
 </main>
 
-<svelte:body on:click={window.api.hide} on:keydown={keypressHandler} />
+<svelte:body on:keydown={keypressHandler} />
 
 <style>
 	main {
