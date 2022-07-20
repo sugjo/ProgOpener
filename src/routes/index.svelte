@@ -47,7 +47,7 @@
 
 	const openHandler = (name, path) => {
 		browser && window.api.hide();
-		browser && window.api.exec(`"${path}\\${name}"`);
+		browser && window.api.exec(`${path}\\${name}`);
 	};
 
 	$: searchResult = search(searchStr, files);

@@ -1,13 +1,15 @@
 {
 	"name": "progopener",
+	"author": "sugjo",
 	"version": "0.0.1",
 	"main": "src/electron.cjs",
 	"scripts": {
 		"dev": "vite dev",
 		"preview": "vite preview",
-		"electron": "concurrently --kill-others \"vite dev --port 3000\" \"electron src/electron.cjs\"",
+		"clear-icons": "node scripts/clearIcons.cjs",
+		"electron": "set NODE_ENV=development&& concurrently --kill-others \"vite dev --port 3000\" \"electron src/electron.cjs\"",
 		"build": "vite build",
-		"dev:package": "npm run build && electron-builder --config electron-builder.config.json --dir",
+		"dev:package": "npm run build && npm run clear-icons && electron-builder --config electron-builder.config.json --dir",
 		"package": "npm run build && electron-builder --config electron-builder.config.json",
 		"lint": "prettier --check --plugin-search-dir=. .",
 		"format": "prettier --write --plugin-search-dir=. ."

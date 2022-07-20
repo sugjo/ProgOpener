@@ -73,7 +73,7 @@ function settings() {
 
   settingsWindow = new BrowserWindow({
     webPreferences: {
-      enableRemoteModule: true,
+      // enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.cjs'),
     },
   });

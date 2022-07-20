@@ -1,5 +1,6 @@
 {
 	"asar": false,
 	"directories": { "output": "dist" },
-	"files": ["src/electron.cjs", "src/preload.cjs", "src/lib/utils", { "from": "build", "to": "" }]
+	"files": ["src/electron.cjs", "src/preload.cjs", "src/lib/utils", { "from": "build", "to": "" }],
+	"icon": "static/favicon.png"
 }
