@@ -7,8 +7,13 @@ try { require("electron-reloader")(module); } catch { }
 const loadURL = serve({ directory: "." });
 const port = process.env.PORT || 3000;
 const isdev = !app.isPackaged || (process.env.NODE_ENV == "development");
+const lockApp = app.requestSingleInstanceLock();
 let mainWindow;
 let settingsWindow;
+
+if (!lockApp) {
+  app.quit();
+}
 
 function loadVite(port) {
   mainWindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
