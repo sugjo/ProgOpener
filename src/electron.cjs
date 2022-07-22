@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
+const { app, BrowserWindow, ipcMain, globalShortcut, protocol } = require("electron");
 const serve = require("electron-serve");
 const ospath = require("ospath");
 const ws = require("electron-window-state");
@@ -22,6 +22,8 @@ if (!lockApp) {
   app.quit();
 }
 
+protocol.registerSchemesAsPrivileged([{ scheme: 'atom', privileges: { bypassCSP: true } }])
+
 function loadVite(port) {
   mainWindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
     setTimeout(() => { loadVite(port); }, 200);
@@ -32,6 +34,10 @@ function createMainWindow() {
 
   let isShowing = false;
 
+  protocol.registerFileProtocol('atom', (request, callback) => {
+    const url = request.url.substr(7)
+    callback({ path: path.normalize(`./icons/${url}`) })
+  })
 
   mainWindow = new BrowserWindow({
     show: false,
@@ -50,7 +56,7 @@ function createMainWindow() {
     webPreferences: {
       devTools: isdev,
       enableRemoteModule: true,
-      preload: path.join(__dirname, "preload.cjs")
+      preload: path.join(__dirname, "preload.cjs"),
     }
   });
 
@@ -59,7 +65,7 @@ function createMainWindow() {
   })
 
   ipcMain.on("hide", hide);
-  mainWindow.on("blur", hide);
+  isdev && mainWindow.on("blur", hide);
 
   function hide() {
     mainWindow.webContents.send('hide');

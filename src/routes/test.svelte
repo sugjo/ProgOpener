@@ -30,6 +30,5 @@
 		gap: 10px;
 		width: 100%;
 		height: 100%;
-		background-image: url(file:///D:/Files/Desktop/%D1%84%D0%BE%D0%BD.png);
 	}
 </style>

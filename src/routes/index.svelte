@@ -61,16 +61,16 @@
 <main on:click|stopPropagation use:clickOutside={window.api.hide} class={isShowing ? '' : 'loading'}>
 	<input bind:this={inputElement} type="text" bind:value={searchStr} />
 	<span
-		class="material-symbols-outlined btn"
+		class="btn"
 		on:click={() => browser && window.api.send('openSettings')}
 	>
-		more_horiz
+		⋯
 	</span>
 	{#if searchStr && searchResult.length}
 		<div class="search-result" transition:fly={{ duration: 120, y: -15 }}>
 			{#each searchResult as { name, path }}
 				<button on:click|stopPropagation={() => openHandler(name, path)}>
-					<img src="./icons/{name}.png" onError="this.src='./images/empty.png'" alt="" />
+					<img src="atom://{name}.png" onError="this.src='./images/empty.png'" alt="" />
 					{name.substr(0, name.lastIndexOf('.')) || name}
 				</button>
 			{/each}
