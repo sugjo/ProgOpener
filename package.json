@@ -31,11 +31,13 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"electron-json-storage": "^4.5.0",
 		"electron-serve": "^1.1.0",
 		"electron-window-state": "^5.0.3",
 		"emulate-key-in-browser": "^1.0.0-rc.1",
 		"extract-file-icon": "^0.3.2",
 		"mz": "^2.7.0",
+		"ospath": "^1.2.2",
 		"svelte-local-storage-store": "^0.2.6"
 	}
 }

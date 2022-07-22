@@ -5,28 +5,32 @@
 	import { fly } from 'svelte/transition';
 	import { settings } from '../store/settings';
 	import { browser } from '$app/env';
-	import clickOutside from "$lib/utils/clickOutside"
+	import clickOutside from '$lib/utils/clickOutside';
 
-	let isLoad = false;
+	export const prerender = true;
+
 	let inputElement;
+	let isShowing = false;
 	let searchStr = null;
 	let files = [];
 	let searchResult = [];
 
-	browser &&
-		window.api.receive('hide', () => {
-			isLoad = false;
+	onMount(() => {
+		window.api.load();
+
+		window.api.receive('initialData', (initialData) => {
+			files = initialData.programmsList;
 		});
 
-	browser &&
+		window.api.receive('hide', () => {
+			isShowing = false;
+		});
+
 		window.api.receive('show', () => {
-			isLoad = true;
 			searchStr = '';
+			isShowing = true;
 			inputElement?.focus();
 		});
-
-	onMount(() => {
-		browser && window.api.init($settings).then((e) => (files = e));
 	});
 
 	const keypressHandler = (e) => {
@@ -54,7 +58,7 @@
 	$: searchResult = search(searchStr, files);
 </script>
 
-<main on:click|stopPropagation use:clickOutside={window.api.hide} class={isLoad ? '' : 'loading'}>
+<main on:click|stopPropagation use:clickOutside={window.api.hide} class={isShowing ? '' : 'loading'}>
 	<input bind:this={inputElement} type="text" bind:value={searchStr} />
 	<span
 		class="material-symbols-outlined btn"

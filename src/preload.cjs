@@ -1,19 +1,26 @@
-const { contextBridge, ipcRenderer } = require('electron')
-const { exec } = require('mz/child_process.js')
-const init = require('./lib/utils/init.cjs')
+const { contextBridge, ipcRenderer } = require('electron');
+const storage = require('./lib/utils/storagePromisify.cjs');
+const { exec } = require('mz/child_process.js');
+const ospath = require("ospath");
+const path = require('path');
+const { setDataPath } = require('electron-json-storage');
+
+setDataPath(path.join(ospath.data(), "ProgOpener"));
 
 contextBridge.exposeInMainWorld(
     'api', {
     send: (channel, data) => {
         ipcRenderer.send(channel, data)
     },
-    sendSync: (channel, data) => {
-        ipcRenderer.sendSync(channel, data)
-    },
     receive: (channel, func) => {
         ipcRenderer.on(channel, (event, ...args) => func(...args))
     },
     hide: () => ipcRenderer.send("hide"),
-    init: (settings) => init(settings),
-    exec: (command) => exec(command)
+    exec: (command) => exec(command),
+    setSettings: (data) => storage.set("settings", data),
+    getSettings: () => storage.get("settings"),
+    removeSettings: () => storage.remove("settings"),
+    clearSettings: () => storage.clear(),
+
+    load: () => ipcRenderer.send("load")
 })

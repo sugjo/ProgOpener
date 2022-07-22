@@ -1,4 +1,5 @@
 export default (searchStr, files) => {
+    if (!files) return;
     const regex = new RegExp(`\\b${searchStr}`, 'gi');
     return files
         .filter(file => removeFileExtension(file.name).match(regex))

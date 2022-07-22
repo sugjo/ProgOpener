@@ -1,9 +1,16 @@
 const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const serve = require("electron-serve");
+const ospath = require("ospath");
 const ws = require("electron-window-state");
 const path = require('path');
+const getIcons = require("./lib/utils/getIcons.cjs");
+const getProgrammsList = require("./lib/utils/getProgrammsList.cjs");
+const storage = require('./lib/utils/storagePromisify.cjs');
+const { setDataPath } = require('electron-json-storage');
+
 try { require("electron-reloader")(module); } catch { }
 
+setDataPath(path.join(ospath.data(), "ProgOpener"));
 const loadURL = serve({ directory: "." });
 const port = process.env.PORT || 3000;
 const isdev = !app.isPackaged || (process.env.NODE_ENV == "development");
@@ -52,7 +59,7 @@ function createMainWindow() {
   })
 
   ipcMain.on("hide", hide);
-  mainWindow.on("blur", hide)
+  mainWindow.on("blur", hide);
 
   function hide() {
     mainWindow.webContents.send('hide');
@@ -65,6 +72,15 @@ function createMainWindow() {
     mainWindow.show()
     isShowing = true;
   }
+
+  ipcMain.on("load", async () => {
+    const paths = (await storage.get('settings')).paths;
+    const programmsList = await getProgrammsList(paths);
+    getIcons(programmsList);
+    mainWindow.webContents.send('initialData', {
+      programmsList,
+    });
+  });
 
   mainWindow.once("close", () => { mainWindow = null; });
 

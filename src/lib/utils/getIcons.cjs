@@ -4,6 +4,8 @@ const fs = require("mz/fs");
 
 module.exports = async function (programmsList) {
 
+    if (!programmsList) return
+
     const iconPath = process.env.NODE_ENV == "development" ? "./static/icons" : "./resources/app/icons";
 
     try {

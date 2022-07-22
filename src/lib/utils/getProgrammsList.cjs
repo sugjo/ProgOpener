@@ -1,6 +1,8 @@
 const fs = require("mz/fs");
 
 module.exports = async function (paths) {
+    if (!paths) return;
+
     let findedFiles = [];
 
     for await (const path of paths) {
