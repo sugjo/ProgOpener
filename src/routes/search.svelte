@@ -1,11 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import search from '$lib/components/search.js';
+	import search from '../lib/components/search.js';
 	import { emulateKey } from 'emulate-key-in-browser';
 	import { fly } from 'svelte/transition';
-	import { settings } from '../store/settings';
-	import { browser } from '$app/env';
-	import clickOutside from '$lib/utils/clickOutside';
+	import clickOutside from '../lib/utils/clickOutside';
 
 	export const prerender = true;
 
@@ -51,8 +49,8 @@
 	};
 
 	const openHandler = (name, path) => {
-		browser && window.api.hide();
-		browser && window.api.exec(`"${path}\\${name}"`);
+		window.api.hide();
+		window.api.exec(`"${path}\\${name}"`);
 	};
 
 	$: searchResult = search(searchStr, files);
@@ -62,7 +60,7 @@
 	<input bind:this={inputElement} type="text" bind:value={searchStr} />
 	<span
 		class="btn"
-		on:click={() => browser && window.api.send('openSettings')}
+		on:click={() => window.api.send('openSettings')}
 	>
 		⋯
 	</span>
@@ -70,7 +68,7 @@
 		<div class="search-result" transition:fly={{ duration: 120, y: -15 }}>
 			{#each searchResult as { name, path }}
 				<button on:click|stopPropagation={() => openHandler(name, path)}>
-					<img src="atom://{name}.png" onError="this.src='./images/empty.png'" alt="" />
+					<img src="atom://{name}.png" onError="this.src='./public/images/empty.png'" alt="" />
 					{name.substr(0, name.lastIndexOf('.')) || name}
 				</button>
 			{/each}

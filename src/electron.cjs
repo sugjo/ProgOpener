@@ -1,7 +1,5 @@
 const { app, BrowserWindow, ipcMain, globalShortcut, protocol } = require("electron");
-const serve = require("electron-serve");
 const ospath = require("ospath");
-const ws = require("electron-window-state");
 const path = require('path');
 const getIcons = require("./lib/utils/getIcons.cjs");
 const getProgrammsList = require("./lib/utils/getProgrammsList.cjs");
@@ -11,7 +9,8 @@ const { setDataPath } = require('electron-json-storage');
 try { require("electron-reloader")(module); } catch { }
 
 setDataPath(path.join(ospath.data(), "ProgOpener"));
-const loadURL = serve({ directory: "." });
+protocol.registerSchemesAsPrivileged([{ scheme: 'atom', privileges: { bypassCSP: true } }])
+
 const port = process.env.PORT || 3000;
 const isdev = !app.isPackaged || (process.env.NODE_ENV == "development");
 const lockApp = app.requestSingleInstanceLock();
@@ -20,14 +19,6 @@ let settingsWindow;
 
 if (!lockApp) {
   app.quit();
-}
-
-protocol.registerSchemesAsPrivileged([{ scheme: 'atom', privileges: { bypassCSP: true } }])
-
-function loadVite(port) {
-  mainWindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
-    setTimeout(() => { loadVite(port); }, 200);
-  });
 }
 
 function createMainWindow() {
@@ -40,7 +31,7 @@ function createMainWindow() {
   })
 
   mainWindow = new BrowserWindow({
-    show: false,
+    show: true,
     alwaysOnTop: true,
     resizable: false,
     transparent: true,
@@ -54,9 +45,9 @@ function createMainWindow() {
     movable: false,
 
     webPreferences: {
-      devTools: isdev,
+      devTools: true,
       enableRemoteModule: true,
-      preload: path.join(__dirname, "preload.cjs"),
+      preload: path.join(__dirname, 'preload.cjs'),
     }
   });
 
@@ -88,22 +79,34 @@ function createMainWindow() {
     });
   });
 
+  mainWindow.webContents.openDevTools();
+
   mainWindow.once("close", () => { mainWindow = null; });
 
-  if (isdev) loadVite(port);
-  else loadURL(mainWindow);
+  if (isdev) {
+    mainWindow.loadURL(`http://127.0.0.1:${port}/src/search.html`)
+  } else {
+    mainWindow.loadFile(`src/search.html`)
+  }
 }
 
 function createSettingsWindow() {
 
   settingsWindow = new BrowserWindow({
     webPreferences: {
+      devTools: true,
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.cjs'),
     },
   });
 
-  settingsWindow.loadURL(`http://127.0.0.1:${port}/test`);
+  settingsWindow.webContents.openDevTools();
+  if (isdev) {
+    settingsWindow.loadURL(`http://127.0.0.1:${port}/src/settings.html`)
+  } else {
+    settingsWindow.loadFile(`src/settings.html`)
+  }
+
 }
 
 ipcMain.on("openSettings", createSettingsWindow);

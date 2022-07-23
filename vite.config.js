@@ -1,8 +1,19 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { resolve } from 'path'
 
-/** @type {import('vite').UserConfig} */
-const config = {
-	plugins: [sveltekit()]
-};
+// https://vitejs.dev/config/
+export default defineConfig({
+	build: {
+		outDir: "build",
+		rollupOptions: {
 
-export default config;
+			input: {
+				main: resolve(__dirname, 'src/search.html'),
+				admin: resolve(__dirname, 'src/settings.html')
+			}
+		}
+	},
+	base: "./",
+	plugins: [svelte()]
+})

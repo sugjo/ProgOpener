@@ -6,7 +6,6 @@
 	"scripts": {
 		"dev": "vite dev",
 		"preview": "vite preview",
-		"clear-icons": "node scripts/clearIcons.cjs",
 		"electron": "set NODE_ENV=development&& concurrently --kill-others \"vite dev --port 3000\" \"electron src/electron.cjs\"",
 		"build": "vite build",
 		"dev:package": "npm run build && npm run clear-icons && electron-builder --config electron-builder.config.json --dir",
@@ -15,9 +14,7 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-static": "^1.0.0-next.37",
-		"@sveltejs/kit": "next",
+		"@sveltejs/vite-plugin-svelte": "^1.0.1",
 		"concurrently": "^7.2.2",
 		"electron": "^19.0.8",
 		"electron-builder": "^23.1.0",
@@ -26,13 +23,13 @@
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
-		"typescript": "^4.7.4",
 		"vite": "^3.0.0"
 	},
 	"type": "module",
 	"dependencies": {
 		"electron-json-storage": "^4.5.0",
 		"electron-serve": "^1.1.0",
+		"electron-window-manager": "^1.0.6",
 		"electron-window-state": "^5.0.3",
 		"emulate-key-in-browser": "^1.0.0-rc.1",
 		"extract-file-icon": "^0.3.2",
