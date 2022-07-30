@@ -2,6 +2,8 @@ const { app, BrowserWindow, ipcMain, globalShortcut, protocol, screen } = requir
 const { setDataPath } = require('electron-json-storage');
 const path = require('path');
 const ospath = require("ospath");
+const { createTray } = require("./tray.cjs");
+const { isAppQuitting } = require("./utils/appState.cjs")
 const getIcons = require("./utils/getIcons.cjs");
 const storage = require('./utils/storagePromisify.cjs');
 const getProgramsList = require("./utils/getProgramsList.cjs");
@@ -55,6 +57,10 @@ function createMainWindow() {
     isShowing ? hide() : show();
   })
 
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+  });
+
   function hide() {
     mainWindow.webContents.send('hide');
     mainWindow.minimize();
@@ -72,10 +78,10 @@ function createMainWindow() {
   ipcMain.on("load", load);
   ipcMain.on("openSettings", () => settingsWindow.show());
 
-  mainWindow.on('close', (event) => {
-    if (!app.isQuiting) {
-      event.preventDefault();
-      mainWindow.hide();
+  mainWindow.on('close', (e) => {
+    if (!isAppQuitting()) {
+      e.preventDefault();
+      hide();
     }
 
     return false;
@@ -100,9 +106,13 @@ function createSettingsWindow() {
     },
   });
 
-  settingsWindow.on('close', (event) => {
-    if (!app.isQuiting) {
-      event.preventDefault();
+  settingsWindow.on("closed", () => {
+    mainWindow = null;
+  });
+
+  settingsWindow.on('close', (e) => {
+    if (!isAppQuitting()) {
+      e.preventDefault();
       settingsWindow.hide();
     }
 
@@ -119,6 +129,7 @@ function createSettingsWindow() {
 async function init() {
   createSettingsWindow();
   createMainWindow();
+  createTray();
   protocol.registerFileProtocol('atom', (request, callback) => {
     const url = request.url.substr(7);
     callback({ path: path.normalize(`./icons/${url}`) });
@@ -134,5 +145,16 @@ async function load() {
   });
 }
 
+app.on('before-quit', (e) => {
+  mainWindow.removeAllListeners('close');
+  settingsWindow.removeAllListeners('close');
+  mainWindow.destroy();
+  settingsWindow.destroy();
+});
+
+app.on("will-quit", () => {
+  globalShortcut.unregisterAll();
+  protocol.unregisterAll();
+});
+
 app.once("ready", init);
-app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
