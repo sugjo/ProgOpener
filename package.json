@@ -2,11 +2,11 @@
 	"name": "progopener",
 	"author": "sugjo",
 	"version": "0.0.1",
-	"main": "src/electron.cjs",
+	"main": "src/electron/electron.cjs",
 	"scripts": {
 		"dev": "vite dev",
 		"preview": "vite preview",
-		"electron": "set NODE_ENV=development&& concurrently --kill-others \"vite dev --port 3000\" \"electron src/electron.cjs\"",
+		"electron": "set NODE_ENV=development&& concurrently --kill-others \"vite dev --port 3000\" \"electron src/electron/electron.cjs\"",
 		"build": "vite build",
 		"dev:package": "npm run build && npm run clear-icons && electron-builder --config electron-builder.config.json --dir",
 		"package": "npm run build && electron-builder --config electron-builder.config.json",

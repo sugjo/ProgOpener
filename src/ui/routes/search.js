@@ -1,4 +1,4 @@
-import App from './routes/search.svelte'
+import App from './search.svelte'
 
 const app = new App({
     target: document.getElementById('search')

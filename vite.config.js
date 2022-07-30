@@ -9,8 +9,8 @@ export default defineConfig({
 		rollupOptions: {
 
 			input: {
-				main: resolve(__dirname, 'src/search.html'),
-				admin: resolve(__dirname, 'src/settings.html')
+				main: resolve(__dirname, 'src/ui/routes/search.html'),
+				admin: resolve(__dirname, 'src/ui/routes/settings.html')
 			}
 		}
 	},

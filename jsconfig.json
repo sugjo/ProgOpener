@@ -1,22 +1,22 @@
 {
-  "compilerOptions": {
-    "moduleResolution": "Node",
-    "target": "ESNext",
-    "module": "ESNext",
-    "importsNotUsedAsValues": "error",
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "checkJs": true,
-    		"paths": {
+	"compilerOptions": {
+		"moduleResolution": "Node",
+		"target": "ESNext",
+		"module": "ESNext",
+		"importsNotUsedAsValues": "error",
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": ".",
+		"checkJs": true,
+		"paths": {
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
 			"~/*": ["src/*"]
 		}
-  },
-  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"]
+	},
+	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"]
 }

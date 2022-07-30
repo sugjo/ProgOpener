@@ -1,12 +1,12 @@
 {
-	"asar": false,
+	"asar": true,
 	"directories": { "output": "dist" },
 	"files": [
-		"src/electron.cjs",
-		"src/preload.cjs",
-		"src/lib/utils",
-		"src/public",
+		"src/electron/*",
+		"src/electron/utils/*",
+		"src/ui/public/*",
+		"src/ui/public/images/*",
 		{ "from": "build", "to": "" }
 	],
-	"icon": "static/favicon.png"
+	"icon": "src/ui/public/favicon.png"
 }

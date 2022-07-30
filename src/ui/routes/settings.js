@@ -1,4 +1,4 @@
-import App from './routes/settings.svelte'
+import App from './settings.svelte'
 
 const app = new App({
     target: document.getElementById('settings')
