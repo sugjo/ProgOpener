@@ -1,6 +1,7 @@
 <script>
-	import keydown from '../utils/keydown';
+	import { fade } from 'svelte/transition';
 	import clickOutside from '../utils/clickOutside';
+	import keydown from '../utils/keydown';
 
 	export let value;
 
