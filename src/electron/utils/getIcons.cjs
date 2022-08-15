@@ -15,7 +15,7 @@ module.exports = async function (programsList) {
     }
 
     const icons = await fs.readdir(iconPath);
-    const iconsWithoutExtension = icons.map((icon) => icon.substr(0, icon.lastIndexOf(".")))
+    const iconsWithoutExtension = icons.map((icon) => icon.slice(0, icon.lastIndexOf(".")))
     const programsListNames = programsList.map((program) => program.name)
 
     for (const programs of programsList) {

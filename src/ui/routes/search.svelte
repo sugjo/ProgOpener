@@ -13,7 +13,6 @@
 
 	window.api.receive('loadData', ({ programsList }) => {
 		files = programsList;
-		console.log(programsList);
 	});
 
 	const openSettingsHandler = () => {

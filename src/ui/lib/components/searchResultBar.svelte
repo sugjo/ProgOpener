@@ -8,7 +8,7 @@
 	const dispatch = createEventDispatcher();
 	const openAppHandler = (name, path) => dispatch('openApp', `"${path}\\${name}"`);
 
-	$: iconName = (name) => name.substr(0, name.lastIndexOf('.')) || name;
+	$: iconName = (name) => name.slice(0, name.lastIndexOf('.')) || name;
 </script>
 
 <div class="search-result" transition:fly={{ duration: 120, y: -15 }}>

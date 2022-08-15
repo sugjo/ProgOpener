@@ -19,8 +19,9 @@ async function init() {
   createSettingsWindow();
   createTray();
   load();
+
   protocol.registerFileProtocol('atom', (request, callback) => {
-    const url = request.url.substr(7);
+    const url = request.url.slice(7);
     callback({ path: path.normalize(`./icons/${url}`) });
   });
 }

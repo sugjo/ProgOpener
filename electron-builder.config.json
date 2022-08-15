@@ -1,11 +1,12 @@
 {
-	"asar": true,
+	"asar": false,
 	"directories": { "output": "dist" },
 	"files": [
 		"src/electron/*",
 		"src/electron/utils/*",
-		"src/ui/public/*",
-		"src/ui/public/images/*",
+		{ "from": "src/electron", "to": "src/electron" },
+		{ "from": "src/ui/public", "to": "src/ui/public" },
+		{ "from": "src/ui/lang", "to": "src/ui/lang" },
 		{ "from": "build", "to": "" }
 	],
 	"icon": "src/ui/public/favicon.png"

@@ -1,15 +1,13 @@
 const { getSearchWindow } = require("./searchWindow.cjs");
 const { isAppQuitting } = require("./utils/appState.cjs");
 const { isDev, port } = require("./utils/index.cjs");
-const { BrowserWindow } = require("electron");
+const { BrowserWindow, protocol } = require("electron");
 const path = require('path');
 
 let settingsWindow;
 
 function createSettingsWindow() {
     settingsWindow = new BrowserWindow({
-        parent: getSearchWindow(),
-        modal: true,
         show: false,
         webPreferences: {
             devTools: true,

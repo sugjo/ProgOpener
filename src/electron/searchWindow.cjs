@@ -7,7 +7,6 @@ let searchWindow;
 
 protocol.registerSchemesAsPrivileged([{ scheme: 'atom', privileges: { bypassCSP: true } }])
 
-
 function createSearchWindow() {
     const size = screen.getPrimaryDisplay().workAreaSize;
 
