@@ -1,14 +1,24 @@
+import translitReverse from "./translitReverse";
+
 export default (searchStr, files) => {
     if (!files) return;
-    const regex = new RegExp(`\\b${searchStr}`, 'gi');
-    return files
+    const regex = new RegExp(`${searchStr}`, 'gi');
+    const reversedRegex = new RegExp(`^${translitReverse(searchStr)}`, 'gi');
+
+    let filteredFiles = files
         .filter(file => removeFileExtension(file.name).match(regex))
-        .sort(sortByRegex)
+        .sort((a, b) => sortByRegexp(new RegExp(`^${searchStr}`, 'i'), a, b))
         .reverse();
 
-    function sortByRegex(a, b) {
-        const regexStartWith = new RegExp(`^${searchStr}`, 'i');
-        if (a.name.match(regexStartWith)) {
+    let filteredReversedFiles = files
+        .filter(file => removeFileExtension(file.name).match(reversedRegex))
+        .sort((a, b) => sortByRegexp(new RegExp(`^${translitReverse(searchStr)}`, 'i'), a, b))
+        .reverse();
+
+    return filteredFiles.concat(filteredReversedFiles)
+
+    function sortByRegexp(regexp, a, b) {
+        if (a.name.match(regexp)) {
             if (a.name > b.name) return 1;
             if (a.name == b.name) return 0;
         }
@@ -16,6 +26,6 @@ export default (searchStr, files) => {
     }
 
     function removeFileExtension(file) {
-        return file.substr(0, file.lastIndexOf("."))
+        return file.slice(0, file.lastIndexOf("."));
     }
 }
