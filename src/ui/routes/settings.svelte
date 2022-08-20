@@ -21,10 +21,6 @@
 	const clearSettingsHandler = async () => {
 		window.api.clearSettings();
 	};
-
-	lang.subscribe((value) => {
-		console.log(value);
-	});
 </script>
 
 <svelte:head>
@@ -38,6 +34,18 @@
 			<Chips radio isCheck={$lang == 'ru'} on:check={() => ($lang = 'ru')} text="Русский" />
 			<Chips radio isCheck={$lang == 'en'} on:check={() => ($lang = 'en')} text="English" />
 		</Dropdown>
+	</SettingsBody>
+
+	<SettingsBody src="../public/images/startup.svg" title={$i18n.t('add-to-startup')}>
+		{#await window.startup.isEnabled}
+			<Toggle />
+		{:then value}
+			<Toggle
+				isCheck={value}
+				on:check={window.startup.enable}
+				on:uncheck={window.startup.disable}
+			/>
+		{/await}
 	</SettingsBody>
 
 	<h2>{$i18n.t('about')}</h2>
