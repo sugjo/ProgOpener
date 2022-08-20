@@ -8,6 +8,7 @@ let settingsWindow;
 
 function createSettingsWindow() {
     settingsWindow = new BrowserWindow({
+        autoHideMenuBar: true,
         show: false,
         webPreferences: {
             devTools: true,
