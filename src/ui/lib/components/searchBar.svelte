@@ -1,5 +1,4 @@
 <script>
-	import { fade } from 'svelte/transition';
 	import clickOutside from '../utils/clickOutside';
 	import keydown from '../utils/keydown';
 
@@ -36,30 +35,14 @@
 </main>
 
 <style>
-	:root,
-	::after,
-	::before {
-		--search-width: 600px;
-		--search-height: 50px;
-		--active-color: #417fb1;
-		--background: #1a1b1f;
-		--background-active: #25262a;
-		--border-active: 2px solid var(--active-color);
-		--border-hover: 2px solid #5e5e5e;
-		--border-radius: 5px;
-		--color: #fff;
-	}
-
 	main {
-		display: flex;
 		flex-direction: column;
 		gap: 5px;
-
 		background-color: var(--background);
 		border-radius: var(--border-radius);
 		border: var(--border);
 		color: var(--color);
-
+		width: var(--search-width);
 		margin-top: calc(50vh - var(--search-height) / 2);
 		font-size: 100%;
 	}
@@ -70,8 +53,7 @@
 
 		border: 2px solid var(--background);
 		border-radius: 5px;
-
-		width: var(--search-width);
+		width: 100%;
 		height: var(--search-height);
 		padding: 5px;
 	}
