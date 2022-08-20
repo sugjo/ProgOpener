@@ -1,10 +1,11 @@
+const { isEnabled, enable, disable } = require("./utils/auto-launch.cjs");
 const { contextBridge, ipcRenderer, app } = require('electron');
-const storage = require('./utils/storagePromisify.cjs');
+const { setDataPath } = require('electron-json-storage');
+const { version } = require("../../package.json");
 const { exec } = require('mz/child_process.js');
+const storage = require('./utils/storagePromisify.cjs');
 const ospath = require("ospath");
 const path = require('path');
-const { setDataPath } = require('electron-json-storage');
-const { version } = require("../../package.json")
 
 setDataPath(path.join(ospath.data(), "ProgOpener"));
 
@@ -28,4 +29,10 @@ contextBridge.exposeInMainWorld(
     clearSettings: () => storage.clear(),
 
     version,
+})
+
+contextBridge.exposeInMainWorld('startup', {
+    isEnabled,
+    enable,
+    disable
 })
