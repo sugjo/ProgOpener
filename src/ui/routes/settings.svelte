@@ -27,8 +27,8 @@
 	});
 </script>
 
-<svelte:head >
-  <title>{$i18n.t('settings')}</title>
+<svelte:head>
+	<title>{$i18n.t('settings')}</title>
 </svelte:head>
 
 <main>
@@ -39,6 +39,13 @@
 			<Chips radio isCheck={$lang == 'en'} on:check={() => ($lang = 'en')} text="English" />
 		</Dropdown>
 	</SettingsBody>
+
+	<h2>{$i18n.t('about')}</h2>
+	<SettingsBody
+		src="../public/images/ProgOpener.svg"
+		title="ProgOpener"
+		body="{$i18n.t('version')}: {window.api.version}"
+	/>
 
 	<!-- to debug -->
 
