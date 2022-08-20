@@ -1,5 +1,7 @@
 {
 	"settings": "Settings",
 	"lang": "Language",
-	"system": "System"
+	"system": "System",
+	"about": "About",
+	"version": "Version"
 }
