@@ -4,7 +4,7 @@ import i18next from "i18next";
 import HttpApi from 'i18next-http-backend';
 import LanguageDetector from "i18next-browser-languagedetector";
 
-let savedLang = await window.api.getSettings('lang')
+let savedLang = await window.api.getStorage('lang')
 
 function createLangSwap() {
     const { subscribe, set } = writable(savedLang || "ru")
@@ -13,7 +13,7 @@ function createLangSwap() {
         subscribe,
         set: (lang) => {
             set(lang);
-            window.api.setSettings("lang", lang)
+            window.api.setStorage("lang", lang)
         },
     }
 }

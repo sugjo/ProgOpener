@@ -11,7 +11,7 @@
 		window.api.load();
 	});
 
-	window.api.receive('loadData', ({ programsList }) => {
+	window.api.receive('loaded', ({ programsList }) => {
 		files = programsList;
 	});
 

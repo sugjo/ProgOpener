@@ -14,11 +14,10 @@ if (!lockApp) app.quit()
 ipcMain.on("load", load);
 ipcMain.on("openSettings", () => getSettingsWindow().show());
 
-async function init() {
+function init() {
   createSearchWindow();
   createSettingsWindow();
   createTray();
-  load();
 
   protocol.registerFileProtocol('atom', (request, callback) => {
     const url = request.url.slice(7);

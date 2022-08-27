@@ -22,7 +22,7 @@
 
 <style>
 	.search-result {
-		max-height: 400px;
+		max-height: 35vh;
 		overflow: auto;
 		width: 100%;
 	}
