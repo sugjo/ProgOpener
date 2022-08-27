@@ -22,11 +22,10 @@ contextBridge.exposeInMainWorld(
     exec: (command) => exec(command),
     load: () => ipcRenderer.send("load"),
 
-    //to debug
-    setSettings: (name, data) => storage.set(name, data),
-    getSettings: (name) => storage.get(name),
-    removeSettings: (name) => storage.remove(name),
-    clearSettings: () => storage.clear(),
+    setStorage: (name, data) => storage.set(name, data),
+    getStorage: (name) => storage.get(name),
+    removeStorage: (name) => storage.remove(name),
+    clearStorage: () => storage.clear(),
 
     version,
 })

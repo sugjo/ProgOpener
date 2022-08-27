@@ -1,11 +1,12 @@
 <script>
+	import Icon from './icon.svelte';
 	export let title;
 	export let body = '';
 	export let src;
 </script>
 
 <div class="settings-body" class:titleOnly={!body}>
-	<img class="icon" {src} draggable="false" alt="" />
+	<Icon {src} />
 	<div class="title">
 		{title}
 	</div>
@@ -34,20 +35,8 @@
 		padding: 15px 0;
 	}
 
-	img {
-		user-select: none;
-		filter: invert(100%);
-		height: 30px;
-		width: 30px;
-	}
-
 	.titleOnly {
 		grid-template-areas: 'icon title btns';
-	}
-
-	.icon {
-		grid-area: icon;
-		margin: 0 15px;
 	}
 
 	.title {
