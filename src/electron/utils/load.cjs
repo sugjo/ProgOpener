@@ -8,7 +8,7 @@ module.exports = async function () {
     const paths = (await storage.get('settings')).paths;
     const programsList = await getProgramsList(paths);
     getIcons(programsList);
-    getSearchWindow().webContents.send('loadData', {
+    getSearchWindow().webContents.send('loaded', {
         programsList,
     });
 }

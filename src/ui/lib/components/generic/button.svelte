@@ -2,7 +2,7 @@
 	export let icon = null;
 </script>
 
-<button on:click>
+<button on:click|stopPropagation>
 	<div class="button-body">
 		{#if icon}
             <img draggable="false" src={icon} alt="" />

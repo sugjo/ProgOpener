@@ -9,13 +9,15 @@ const path = require('path');
 
 setDataPath(path.join(ospath.data(), "ProgOpener"));
 
-contextBridge.exposeInMainWorld(
-    'api', {
+contextBridge.exposeInMainWorld('api', {
     send: (channel, data) => {
         ipcRenderer.send(channel, data)
     },
     receive: (channel, func) => {
         ipcRenderer.on(channel, (event, ...args) => func(...args))
+    },
+    invoke: (channel, args) => {
+        return ipcRenderer.invoke(channel, args);
     },
 
     hide: () => ipcRenderer.send("hide"),
@@ -26,7 +28,6 @@ contextBridge.exposeInMainWorld(
     getStorage: (name) => storage.get(name),
     removeStorage: (name) => storage.remove(name),
     clearStorage: () => storage.clear(),
-
     version,
 })
 

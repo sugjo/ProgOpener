@@ -1,6 +1,6 @@
 <script>
-	import clickOutside from '../utils/clickOutside';
-	import keydown from '../utils/keydown';
+	import clickOutside from '../../utils/clickOutside';
+	import keydown from '../../utils/keydown';
 
 	export let value;
 

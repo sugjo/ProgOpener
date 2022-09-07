@@ -1,26 +1,9 @@
 <script>
-	import Chips from '../lib/components/chips.svelte';
-	import Dropdown from '../lib/components/dropdown.svelte';
-	import SettingsBody from '../lib/components/settingsBody.svelte';
-	import Toggle from '../lib/components/toggle.svelte';
+	import { Chips, Dropdown, Toggle } from "../lib/components/generic";
+	import PathEditor from '../lib/components/settingsWindow/pathEditor';
+	import SettingsBody from '../lib/components/settingsWindow/settingsBody.svelte';
 	import i18n from '../lib/utils/languageSwapper';
 	import { lang } from '../lib/utils/languageSwapper';
-
-	const getSettingsHandler = async () => {
-		console.log(await window.api.getSettings('settings'));
-	};
-
-	const setSettingsHandler = async () => {
-		window.api.setSettings('settings', { paths: ['E:\\Links'] });
-	};
-
-	const removeSettingsHandler = async () => {
-		window.api.removeSettings();
-	};
-
-	const clearSettingsHandler = async () => {
-		window.api.clearSettings();
-	};
 </script>
 
 <svelte:head>
@@ -29,6 +12,8 @@
 
 <main>
 	<h1>{$i18n.t('settings')}</h1>
+
+	<h2>Настройки приложения</h2>
 	<SettingsBody src="../public/images/language.svg" title={$i18n.t('lang')}>
 		<Dropdown>
 			<Chips radio isCheck={$lang == 'ru'} on:check={() => ($lang = 'ru')} text="Русский" />
@@ -49,18 +34,12 @@
 	</SettingsBody>
 
 	<h2>{$i18n.t('about')}</h2>
+
 	<SettingsBody
 		src="../public/images/ProgOpener.svg"
 		title="ProgOpener"
 		body="{$i18n.t('version')}: {window.api.version}"
 	/>
-
-	<!-- to debug -->
-
-	<button on:click={getSettingsHandler}>Получить настройки</button>
-	<button on:click={setSettingsHandler}>Сохранить настройки</button>
-	<button on:click={removeSettingsHandler}>Удалить настройку</button>
-	<button on:click={clearSettingsHandler}>Сброс настроек</button>
 </main>
 
 <style>
@@ -81,6 +60,7 @@
 	}
 	h1 {
 		font-size: 20px;
+		text-align: center;
 	}
 	h2 {
 		margin: 10px 0 0 0;
