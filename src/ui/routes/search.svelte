@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import search from '../lib/utils/search';
-	import SearchBar from '../lib/components/searchBar.svelte';
-	import SearchResultBar from '../lib/components/searchResultBar.svelte';
+	import SearchBar from '../lib/components/searchWindow/searchBar.svelte';
+	import SearchResultBar from '../lib/components/searchWindow/searchResultBar.svelte';
 
 	let files = [];
 	let searchStr = '';

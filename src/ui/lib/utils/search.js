@@ -26,6 +26,6 @@ export default (searchStr, files) => {
     }
 
     function removeFileExtension(file) {
-        return file.slice(0, file.lastIndexOf("."));
+        return window.path.basename(file).replace(window.path.extname(file), "");
     }
 }

@@ -1,6 +1,6 @@
 <script>
 	import { fly } from 'svelte/transition';
-	import clickOutside from '../utils/clickOutside';
+	import clickOutside from '../../utils/clickOutside';
 
 	let isCheck = false;
 
