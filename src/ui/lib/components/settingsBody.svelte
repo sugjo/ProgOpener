@@ -1,11 +1,13 @@
 <script>
+	import Icon from './generic/icon.svelte';
+
 	export let title;
 	export let body = '';
 	export let src;
 </script>
 
 <div class="settings-body" class:titleOnly={!body}>
-	<img class="icon" {src} draggable="false" alt="" />
+	<Icon {src} />
 	<div class="title">
 		{title}
 	</div>
