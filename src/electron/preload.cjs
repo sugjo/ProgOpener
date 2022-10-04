@@ -36,3 +36,8 @@ contextBridge.exposeInMainWorld('startup', {
     enable,
     disable
 })
+
+contextBridge.exposeInMainWorld('path', {
+    basename: (P) => path.basename(P),
+    extname: (P) => path.extname(P)
+})
