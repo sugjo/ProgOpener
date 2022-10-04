@@ -7,12 +7,10 @@
 <style>
 	img {
 		user-select: none;
-		filter: invert(100%);
 		height: 30px;
 		width: 30px;
 	}
 	.icon {
-		grid-area: icon;
-		margin: 0 15px;
+		margin: 0;
 	}
 </style>
