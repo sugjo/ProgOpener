@@ -4,5 +4,6 @@ declare global {
 	interface Window {
 		api?: any;
 		startup?: any;
+		path?: any;
 	}
 }
