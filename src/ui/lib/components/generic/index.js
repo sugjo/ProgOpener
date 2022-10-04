@@ -1,5 +1,13 @@
-export { default as Button } from './button.svelte';
-export { default as Chips } from './chips.svelte';
-export { default as Icon } from './icon.svelte';
-export { default as Toggle } from './toggle.svelte';
-export { default as Dropdown } from './dropdown.svelte';
+import Dropdown from './dropdown.svelte';
+import Toggle from './toggle.svelte';
+import Button from './button.svelte';
+import Chips from './chips.svelte';
+import Icon from './icon.svelte';
+
+export {
+    Dropdown,
+    Toggle,
+    Button,
+    Chips,
+    Icon,
+}
