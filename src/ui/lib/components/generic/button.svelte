@@ -1,12 +1,21 @@
 <script>
 	export let icon = null;
+	export let focus = false;
+	export let title = null;
+
+	let button;
+
+	$: if (focus) button?.focus();
 </script>
 
-<button on:click|stopPropagation>
-	<div class="button-body">
+<button {title} bind:this={button} on:blur={() => (focus = false)} on:click|stopPropagation>
+	<div
+		class="button-body {$$slots.default && !icon ? 'text-only' : ''}"
+		style={$$slots.default ? 'padding-right: 10px;' : ''}
+	>
 		{#if icon}
-            <img draggable="false" src={icon} alt="" />
-        {/if}
+			<img draggable="false" src={icon} alt="" />
+		{/if}
 		<slot />
 	</div>
 </button>
@@ -15,7 +24,8 @@
 	button {
 		border-radius: var(--border-radius);
 		transition: 0.2s;
-        padding: 0;
+		padding: 0;
+		border: 2px solid transparent;
 	}
 
 	button:hover {
@@ -27,10 +37,24 @@
 		top: 1px;
 	}
 
-    img {
-        height: 30px;
+	button:focus {
+		background: var(--background-hover);
+		border: 2px solid var(--active-color);
+	}
+
+	.text-only {
+		padding: 5px 10px;
+	}
+
+	.button-body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	img {
+		height: 30px;
 		padding: 5px;
-        width: auto;
-        filter: invert(100%);
-    }
+		width: auto;
+	}
 </style>

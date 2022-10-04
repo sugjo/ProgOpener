@@ -67,6 +67,7 @@ button:focus-visible {
 	--search-height: 50px;
 	--active-color: #417fb1;
 	--background: #1a1b1f;
+	--background-second: #101113;
 	--background-active: #25262a;
 	--background-hover: #2e2f33;
 	--border-active: 2px solid var(--active-color);
