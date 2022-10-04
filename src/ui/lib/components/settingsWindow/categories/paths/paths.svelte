@@ -5,6 +5,7 @@
 
 	const addPathHandler = () => {
 		window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
+			if (!newPath) return
 			settingsStore.update(
 				(settings) => (settings = { ...settings, paths: [...settings.paths, ...newPath] })
 			);
@@ -20,6 +21,7 @@
 
 	const changePathHandler = (pathToUpdate) => {
 		window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
+			if (!newPath) return
 			settingsStore.update((settings) => {
 				let updatedSettings = {
 					...settings,
