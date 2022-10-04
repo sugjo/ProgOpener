@@ -32,7 +32,7 @@
 		background-color: var(--background-active);
 		border-radius: var(--border-radius);
 		font-size: 16px;
-		padding: 15px 0;
+		padding: 15px;
 	}
 
 	.titleOnly {
@@ -44,12 +44,12 @@
 	}
 
 	.body {
+		grid-area: body;
 		align-items: body;
 		margin-top: 5px;
 	}
 
 	.btns {
 		grid-area: btns;
-		margin: 0 15px;
 	}
 </style>
