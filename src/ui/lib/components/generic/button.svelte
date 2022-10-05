@@ -2,13 +2,20 @@
 	export let icon = null;
 	export let focus = false;
 	export let title = null;
+	export let disabled = false;
 
 	let button;
 
 	$: if (focus) button?.focus();
 </script>
 
-<button {title} bind:this={button} on:blur={() => (focus = false)} on:click|stopPropagation>
+<button
+	{disabled}
+	{title}
+	bind:this={button}
+	on:blur={() => (focus = false)}
+	on:click|stopPropagation
+>
 	<div
 		class="button-body {$$slots.default && !icon ? 'text-only' : ''}"
 		style={$$slots.default ? 'padding-right: 10px;' : ''}
@@ -40,6 +47,10 @@
 	button:focus {
 		background: var(--background-hover);
 		border: 2px solid var(--active-color);
+	}
+
+	button:disabled {
+		filter: brightness(0.5);
 	}
 
 	.text-only {
