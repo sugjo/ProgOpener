@@ -12,7 +12,7 @@
 </script>
 
 <div class="search-result" transition:fly={{ duration: 120, y: -15 }}>
-	{#each searchResult as { name, path }}
+	{#each searchResult || [] as { name, path }}
 		<button on:click|stopPropagation={() => openAppHandler(name, path)}>
 			<img src="atom://{name}.png" use:onImageError alt="{iconName(name)} icon" width="32" height="32" />
 			{iconName(name)}
