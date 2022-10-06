@@ -2,13 +2,13 @@
 	export let src;
 </script>
 
-<img class="icon" {src} draggable="false" alt="" />
+<img class="icon" src={window.path.normalize(src)} draggable="false" alt="" />
 
 <style>
 	img {
 		user-select: none;
-		height: 30px;
-		width: 30px;
+		height: 32px;
+		width: 32px;
 	}
 	.icon {
 		margin: 0;

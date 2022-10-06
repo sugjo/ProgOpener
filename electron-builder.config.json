@@ -3,9 +3,8 @@
 	"directories": { "output": "dist" },
 	"files": [
 		"src/electron/electron.cjs",
-		{ "from": "src/electron", "to": "src/electron" },
-		{ "from": "src/ui/public", "to": "src/ui/public" },
+		{ "from": "src-electron", "to": "src-electron" },
 		{ "from": "build", "to": "" }
 	],
-	"icon": "src/ui/public/favicon.png"
+	"icon": "public/favicon.png"
 }

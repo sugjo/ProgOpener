@@ -1,7 +1,8 @@
+const { isDev } = require("./utils/index.cjs")
 const { isEnabled, enable, disable } = require("./utils/auto-launch.cjs");
 const { contextBridge, ipcRenderer, app } = require('electron');
 const { setDataPath } = require('electron-json-storage');
-const { version } = require("../../package.json");
+const { version } = require("../package.json");
 const { exec } = require('mz/child_process.js');
 const storage = require('./utils/storagePromisify.cjs');
 const ospath = require("ospath");
@@ -34,10 +35,11 @@ contextBridge.exposeInMainWorld('api', {
 contextBridge.exposeInMainWorld('startup', {
     isEnabled,
     enable,
-    disable
+    disable,
 })
 
 contextBridge.exposeInMainWorld('path', {
+    normalize: (P) => isDev ? P : path.join(__dirname, "../", P),
     basename: (P) => path.basename(P),
-    extname: (P) => path.extname(P)
+    extname: (P) => path.extname(P),
 })

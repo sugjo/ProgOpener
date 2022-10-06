@@ -70,15 +70,15 @@
 				{@const disabled = !active}
 
 				<div class="path" class:disabled>
-					<Button on:click={() => togglePathUse(currentPath)} icon="../public/images/power.svg" />
+					<Button on:click={() => togglePathUse(currentPath)} icon="/images/power.svg" />
 					<div class="path-body">
 						<div class="path-change">
-							<Icon src="../public/images/folder.svg" />
+							<Icon src="/images/folder.svg" />
 							<p title={path}>{path}</p>
 							<Button
 								disabled={!active}
 								on:click={() => changePathHandler(path)}
-								icon="../public/images/edit.svg"
+								icon="/images/edit.svg"
 							/>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 						disabled={!active}
 						on:click={() => removePathHandler(path)}
 						title="Удалить"
-						icon="../public/images/delete.svg"
+						icon="/images/delete.svg"
 					/>
 				</div>
 				{:else}

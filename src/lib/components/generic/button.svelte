@@ -21,7 +21,7 @@
 		style={$$slots.default ? 'padding-right: 10px;' : ''}
 	>
 		{#if icon}
-			<img draggable="false" src={icon} alt="" />
+			<img draggable="false" src={window.path.normalize(icon)} alt="" />
 		{/if}
 		<slot />
 	</div>

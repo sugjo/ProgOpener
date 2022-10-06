@@ -1,9 +1,10 @@
+const { isDev } = require("./utils/index.cjs");
 const { app, remote, nativeImage, Tray, Menu } = require("electron");
 const { setIsAppQuitting } = require("./utils/appState.cjs")
 const { getSettingsWindow } = require("./settingsWindow.cjs");
 const path = require('path');
 
-const iconPath = path.resolve(__dirname, "..", "ui/public/favicon.png");
+const iconPath = path.join(__dirname, isDev? "../public/" : "../", "favicon.png");
 
 const icon = nativeImage
     .createFromPath(iconPath)

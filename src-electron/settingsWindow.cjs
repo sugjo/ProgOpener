@@ -38,8 +38,8 @@ function createSettingsWindow() {
     })
 
     const uiUrl = isDev
-        ? `http://127.0.0.1:${port}/src/ui/routes/settings.html`
-        : `file://${path.join(__dirname, "../ui/routes/settings.html")}`;
+        ? `http://127.0.0.1:${port}/src/routes/settings.html`
+        : `file://${path.join(__dirname, "../src/routes/settings.html")}`;
 
     settingsWindow.loadURL(uiUrl)
 }

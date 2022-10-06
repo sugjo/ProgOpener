@@ -32,7 +32,7 @@ i18next
         },
         debug: true,
         backend: {
-            loadPath: '../public/lang/{{lng}}.json'
+            loadPath: `${window.path.normalize("/lang")}/{{lng}}.json`
         }
     });
 

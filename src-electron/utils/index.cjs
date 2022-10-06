@@ -17,6 +17,6 @@ function shortcutRegister(cooldown, accelerator, cb) {
     })
 }
 
-module.exports.isDev = !app.isPackaged || (process.env.NODE_ENV == "development");
+module.exports.isDev = (process.env.NODE_ENV == "development");
 module.exports.port = process.env.PORT || 3000;
 module.exports.shortcutRegister = shortcutRegister;

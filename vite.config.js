@@ -7,13 +7,13 @@ export default defineConfig({
 	build: {
 		outDir: "build",
 		rollupOptions: {
-
 			input: {
-				main: resolve(__dirname, 'src/ui/routes/search.html'),
-				admin: resolve(__dirname, 'src/ui/routes/settings.html')
+				main: resolve(__dirname, 'src/routes/search.html'),
+				admin: resolve(__dirname, 'src/routes/settings.html')
 			}
 		},
-		target: 'esnext'
+		target: 'esnext',
+		publicDir: 'public'
 	},
 	base: "./",
 	plugins: [svelte()]

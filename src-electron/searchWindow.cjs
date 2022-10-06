@@ -74,8 +74,8 @@ function createSearchWindow() {
     });
 
     const uiUrl = isDev
-        ? `http://127.0.0.1:${port}/src/ui/routes/search.html`
-        : `file://${path.join(__dirname, "../ui/routes/search.html")}`;
+        ? `http://127.0.0.1:${port}/src/routes/search.html`
+        : `file://${path.join(__dirname, "../src/routes/search.html")}`;
 
     searchWindow.loadURL(uiUrl)
 }

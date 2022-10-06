@@ -8,7 +8,7 @@
 <header>
 	<h2>{title}</h2>
 	{#if helpText}
-		<Button title="Помощь" icon="../public/images/help.svg" />
+		<Button title="Помощь" icon="/images/help.svg" />
 	{/if}
 </header>
 
