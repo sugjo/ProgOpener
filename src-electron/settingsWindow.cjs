@@ -10,6 +10,7 @@ function createSettingsWindow() {
         autoHideMenuBar: true,
         show: false,
         webPreferences: {
+            partition: 'persist:app',
             devTools: true,
             preload: path.join(__dirname, 'preload.cjs'),
         },

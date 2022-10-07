@@ -11,9 +11,9 @@
 
 <div class="dropdown-btn" class:check={isCheck} on:click|stopPropagation={clickHandler}>
 	{#if isCheck}
-		<img src={window.path.normalize('/images/expand_less.svg')} alt="" />
+		<img src="public://images/expand_less.svg" alt="" />
 	{:else}
-		<img src={window.path.normalize('/images/expand_more.svg')} alt="" />
+		<img src="public://images/expand_more.svg" alt="" />
 	{/if}
 </div>
 {#if isCheck}

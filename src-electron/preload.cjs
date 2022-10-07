@@ -11,6 +11,7 @@ const path = require('path');
 setDataPath(path.join(ospath.data(), "ProgOpener"));
 
 contextBridge.exposeInMainWorld('api', {
+    getLangPath: () => isDev ? path.join("/lang") : path.join(__dirname, "../lang"),
     send: (channel, data) => {
         ipcRenderer.send(channel, data)
     },
@@ -39,7 +40,6 @@ contextBridge.exposeInMainWorld('startup', {
 })
 
 contextBridge.exposeInMainWorld('path', {
-    normalize: (P) => isDev ? P : path.join(__dirname, "../", P),
-    basename: (P) => path.basename(P),
-    extname: (P) => path.extname(P),
+    basename: (p) => path.basename(p),
+    extname: (p) => path.extname(p),
 })

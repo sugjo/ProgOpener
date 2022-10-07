@@ -2,7 +2,7 @@
 	export let src;
 </script>
 
-<img class="icon" src={window.path.normalize(src)} draggable="false" alt="" />
+<img class="icon" {src} draggable="false" alt="" />
 
 <style>
 	img {

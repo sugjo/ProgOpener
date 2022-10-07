@@ -8,17 +8,17 @@
 	const categories = [
 		{
 			name: 'Пути',
-			icon: '/images/folder.svg',
+			icon: 'public://images/folder.svg',
 			component: Paths
 		},
 		{
 			name: 'Общие',
-			icon: '/images/settings.svg',
+			icon: 'public://images/settings.svg',
 			component: General
 		},
 		{
 			name: 'Сведения',
-			icon: '/images/info.svg',
+			icon: 'public://images/info.svg',
 			component: Info
 		}
 	];

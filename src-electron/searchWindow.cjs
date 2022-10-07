@@ -1,11 +1,9 @@
-const { BrowserWindow, screen, globalShortcut, ipcMain, protocol } = require("electron");
+const { BrowserWindow, screen, globalShortcut, ipcMain, protocol, session } = require("electron");
 const { isAppQuitting } = require("./utils/appState.cjs")
 const { isDev, port, shortcutRegister } = require("./utils/index.cjs");
 const path = require('path');
 
 let searchWindow;
-
-protocol.registerSchemesAsPrivileged([{ scheme: 'atom', privileges: { bypassCSP: true } }])
 
 function createSearchWindow() {
     const size = screen.getPrimaryDisplay().workAreaSize;
@@ -27,6 +25,7 @@ function createSearchWindow() {
         center: true,
 
         webPreferences: {
+            partition: 'persist:app',
             devTools: true,
             preload: path.join(__dirname, 'preload.cjs'),
         }

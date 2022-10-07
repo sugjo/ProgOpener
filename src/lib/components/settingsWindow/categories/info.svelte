@@ -6,7 +6,7 @@
 
 <Layout title={$i18n.t('about')}>
 	<SettingsBody
-		src="/images/ProgOpener.svg"
+		src="public://images/ProgOpener.svg"
 		title="ProgOpener"
 		body="{$i18n.t('version')}: {window.api.version}"
 	/>
