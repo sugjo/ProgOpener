@@ -1,6 +1,6 @@
 <script>
-	import clickOutside from '../../utils/clickOutside';
-	import keydown from '../../utils/keydown';
+	import clickOutside from '@/utils/clickOutside';
+	import keydown from '@/utils/keydown';
 
 	export let value;
 
@@ -19,7 +19,7 @@
 </script>
 
 <main use:clickOutside={window.api.hide} use:keydown={inputFocus}>
-	<div class="search-panel noisy" class:focus={isFocus}>
+	<div class="search-panel" class:focus={isFocus}>
 		<input
 			on:blur={() => (isFocus = false)}
 			on:focus={() => (isFocus = true)}
@@ -50,7 +50,6 @@
 	.search-panel {
 		display: flex;
 		align-items: center;
-
 		border: 2px solid var(--background);
 		border-radius: 5px;
 		width: 100%;

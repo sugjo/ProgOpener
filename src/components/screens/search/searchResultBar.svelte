@@ -1,7 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
-	import onImageError from '../../utils/onImageError';
+	import onImageError from '@/utils/onImageError';
 
 	export let searchResult;
 

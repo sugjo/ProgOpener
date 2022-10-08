@@ -1,5 +1,5 @@
 <script>
-	import { Button } from '../generic';
+	import Button from "@/components/ui/button.svelte";
 
 	export let title = '';
 	export let helpText = '';
@@ -8,7 +8,7 @@
 <header>
 	<h2>{title}</h2>
 	{#if helpText}
-		<Button title="Помощь" icon="/images/help.svg" />
+		<Button title="Помощь" icon="public://images/help.svg" />
 	{/if}
 </header>
 

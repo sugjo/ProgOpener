@@ -1,12 +1,12 @@
 <script>
-	import Icon from './generic/icon.svelte';
+	import Icon from "@/components/ui/icon.svelte";
 
 	export let title;
 	export let body = '';
 	export let src;
 </script>
 
-<div class="settings-body" class:titleOnly={!body}>
+<div class="settings-card" class:titleOnly={!body}>
 	<Icon {src} />
 	<div class="title">
 		{title}
@@ -22,7 +22,7 @@
 </div>
 
 <style>
-	.settings-body {
+	.settings-card {
 		position: relative;
 		display: grid;
 		grid-template-columns: min-content 1fr;
@@ -33,23 +33,11 @@
 		background-color: var(--background-active);
 		border-radius: var(--border-radius);
 		font-size: 16px;
-		padding: 15px 0;
-	}
-
-	img {
-		user-select: none;
-		filter: invert(100%);
-		height: 30px;
-		width: 30px;
+		padding: 15px;
 	}
 
 	.titleOnly {
 		grid-template-areas: 'icon title btns';
-	}
-
-	.icon {
-		grid-area: icon;
-		margin: 0 15px;
 	}
 
 	.title {
@@ -57,12 +45,12 @@
 	}
 
 	.body {
+		grid-area: body;
 		align-items: body;
 		margin-top: 5px;
 	}
 
 	.btns {
 		grid-area: btns;
-		margin: 0 15px;
 	}
 </style>

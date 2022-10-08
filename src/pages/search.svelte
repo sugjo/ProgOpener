@@ -1,15 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
-	import search from '../lib/utils/search';
-	import SearchBar from '../lib/components/searchWindow/searchBar.svelte';
-	import SearchResultBar from '../lib/components/searchWindow/searchResultBar.svelte';
+	import SearchBar from '@/components/screens/search/searchBar.svelte';
+	import SearchResultBar from '@/components/screens/search/searchResultBar.svelte';
+	import search from '../utils/search';
 
 	let files = [];
 	let searchStr = '';
 
-	onMount(() => {
-		window.api.load();
-	});
+	$: searchResult = search(searchStr, files);
+
+	onMount(() => window.api.load());
 
 	window.api.receive('loaded', ({ programsList }) => {
 		files = programsList;
@@ -25,8 +25,6 @@
 		window.api.hide();
 		window.api.exec(app);
 	};
-
-	$: searchResult = search(searchStr, files);
 </script>
 
 <SearchBar bind:value={searchStr} on:openSettings={openSettingsHandler}>
