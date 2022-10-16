@@ -2,6 +2,7 @@ import settingsStore from '@/stores/settingsStore';
 
 const addSettingItem = (settingName, newSettingItem) => {
     settingsStore.update((settings) => {
+        console.log(settings);
         if (isItemAlreadyExist(settings[settingName], newSettingItem)) return settings
         return { ...settings, [settingName]: [...(settings[settingName] || []), newSettingItem] }
     });
@@ -23,7 +24,7 @@ const changeSettingItem = (settingName, itemFilter, newSettingItem) => {
 };
 
 const isItemAlreadyExist = (arrayToCheck, itemToCheck) => {
-    return arrayToCheck.find((item) =>
+    return arrayToCheck?.find((item) =>
         JSON.stringify(item) == JSON.stringify(itemToCheck)
     )
 }
