@@ -1,4 +1,5 @@
 <script>
+	import Icon from '@/components/ui/icon.svelte';
 	import clickOutside from '@/utils/clickOutside';
 	import keydown from '@/utils/keydown';
 
@@ -27,6 +28,9 @@
 			bind:value
 			type="text"
 		/>
+		<div class="search-icon" class:focus={isFocus}>
+			<Icon src="public://images/search.svg" />
+		</div>
 	</div>
 
 	{#if value}
@@ -47,6 +51,15 @@
 		font-size: 100%;
 	}
 
+	.search-icon {
+		filter: brightness(0.4);
+		transition: 0.2s;
+	}
+
+	.search-icon.focus {
+		filter: brightness(0.8);
+	}
+
 	.search-panel {
 		display: flex;
 		align-items: center;
@@ -61,7 +74,7 @@
 		border: var(--border-hover);
 	}
 
-	.focus {
+	.search-panel.focus {
 		border: var(--border-active);
 	}
 </style>
