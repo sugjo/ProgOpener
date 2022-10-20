@@ -1,7 +1,7 @@
 <script>
 	import SettingsLayout from '@/components/layout/settingsLayout.svelte';
 	import Button from '@/components/ui/button.svelte';
-	import PathCard from '@/components/ui/settings/pathCard.svelte';
+	import PathItem from '@/components/ui/settings/pathItem.svelte';
 	import {
 		addSettingItem,
 		changeSettingItem,
@@ -45,7 +45,7 @@
 	</div>
 	<div class="paths">
 		{#each $settingsStore.paths || [] as { path, disabled }}
-			<PathCard
+			<PathItem
 				{path}
 				{disabled}
 				on:toggle={() => togglePathHandler(path, disabled)}
