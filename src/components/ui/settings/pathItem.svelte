@@ -2,6 +2,7 @@
 	import Button from '../button.svelte';
 	import Icon from '../icon.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { i18n } from '@/utils/languageSwapper';
 
 	export let disabled;
 	export let path;
@@ -9,15 +10,15 @@
 </script>
 
 <div class="path">
-	<div class="disable-button" class:disabled>
+	<div class="disable-button" class:disabled title={disabled? $i18n.t("paths.on"): $i18n.t("paths.off")}>
 		<Button on:click={() => dispatch('toggle')} icon="power" />
 	</div>
 	<div class="path-body" class:disabled>
 		<Icon name="folder" />
 		<p title={path}>{path}</p>
 		<div class="buttons">
-			<Button on:click={() => dispatch('change')} icon="edit" {disabled} />
-			<Button on:click={() => dispatch('delete')} title="Удалить" icon="delete" {disabled} />
+			<Button on:click={() => dispatch('change')} title={$i18n.t("paths.change")} icon="edit" {disabled} />
+			<Button on:click={() => dispatch('delete')} title={$i18n.t("paths.delete")} icon="delete" {disabled} />
 		</div>
 	</div>
 </div>

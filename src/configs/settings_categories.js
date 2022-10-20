@@ -2,22 +2,27 @@ import General from '@/components/screens/settings/general.svelte';
 import Info from '@/components/screens/settings/info.svelte';
 import Paths from '@/components/screens/settings/paths.svelte';
 
-export const categories = [
+const defaultCategory = Paths
+
+let categories = [
 	{
-		name: 'Пути',
+		title: 'paths.name',
 		icon: 'folder',
 		component: Paths
 	},
 	{
-		name: 'Общие',
+		title: 'general.name',
 		icon: 'settings',
 		component: General
 	},
 	{
-		name: 'Сведения',
+		title: 'info.name',
 		icon: 'info',
 		component: Info
 	}
 ];
 
-export const defaultCategory = Paths;
+export  {
+	defaultCategory,
+	categories
+}

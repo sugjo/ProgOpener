@@ -1,5 +1,5 @@
 <script>
-	import Button from "@/components/ui/button.svelte";
+	import Button from '@/components/ui/button.svelte';
 
 	export let title = '';
 	export let helpText = '';
@@ -38,5 +38,9 @@
 
 	h2 {
 		margin: 0;
+	}
+
+	h2:first-letter {
+		text-transform: uppercase;
 	}
 </style>

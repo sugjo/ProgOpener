@@ -1,17 +1,17 @@
 <script>
 	import SettingsMenu from '@/components/ui/settings/settingsMenu.svelte';
 	import { categories, defaultCategory } from '@/configs/settings_categories';
-	import i18n from '../utils/languageSwapper';
+	import { i18n } from '../utils/languageSwapper';
 
 	let currentCategory = defaultCategory;
-	$: categoryName = categories.find(({ component }) => currentCategory == component).name;
+	$: categoryName = categories.find(({ component }) => currentCategory == component).title;
 
 	const changeCategoryHandler = ({ detail: newCategory }) => (currentCategory = newCategory);
 </script>
 
 <svelte:head>
 	<title>
-		{$i18n.t('settings')}: {categoryName}
+		{$i18n.t('settings')}: {$i18n.t(categoryName).toLowerCase()}
 	</title>
 </svelte:head>
 

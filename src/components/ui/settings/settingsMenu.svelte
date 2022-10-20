@@ -1,4 +1,5 @@
 <script>
+	import { i18n } from '@/utils/languageSwapper';
 	import { createEventDispatcher } from 'svelte';
 	import Button from '../button.svelte';
 	import Icon from '../icon.svelte';
@@ -12,12 +13,12 @@
 <aside>
 	<nav>
 		<ul>
-			{#each categories as { component, icon, name }}
+			{#each categories as { component, icon, title }}
 				<li class:active={currentCategory == component}>
 					<Button on:click={() => dispatch('change', component)} --border-radius="0">
 						<div class="aside-item-body">
 							<Icon name={icon} />
-							{name}
+							<span>{$i18n.t(title)}</span>
 						</div>
 					</Button>
 				</li>
@@ -64,6 +65,10 @@
 		align-items: center;
 		gap: 5px;
 		margin: 5px;
+	}
+
+	.aside-item-body > span:first-letter {
+		text-transform: uppercase;
 	}
 
 	.active {

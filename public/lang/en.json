@@ -1,8 +1,26 @@
 {
 	"settings": "Settings",
-	"lang": "Language",
-	"system": "System",
-	"about": "About",
-	"add-to-startup": "Add to startup",
-	"version": "Version"
+	"paths": {
+		"name": "Paths",
+		"title": "Paths to search",
+		"add-paths-title": "Need mere paths?",
+		"empty": "Empty",
+		"change": "Change",
+		"delete": "Delete",
+		"add": "Add",
+		"off": "Off",
+		"on": "On"
+	},
+	"general": {
+		"name": "General",
+		"title": "General",
+		"language": "Language",
+		"add-to-startup": "Add to startup"
+	},
+	"info": {
+		"name": "About",
+		"title": "About",
+		"program-name": "ProgOpener project",
+		"program-version": "Version"
+	}
 }

@@ -1,8 +1,26 @@
 {
 	"settings": "Настройки",
-	"lang": "Язык",
-	"system": "Системный",
-	"about": "О приложении",
-	"add-to-startup": "Добавить в автозагрузку",
-	"version": "Версия"
+	"paths": {
+		"name": "Пути",
+		"title": "Пути для поиска",
+		"add-paths-title": "Нужно больше путей?",
+		"empty": "Пусто",
+		"change": "Изменить",
+		"delete": "Удалить",
+		"add": "Добавить",
+		"off": "Отключить",
+		"on": "Включить"
+	},
+	"general": {
+		"name": "Общие",
+		"title": "Общие",
+		"language": "Язык",
+		"add-to-startup": "Добавить в автозагрузку"
+	},
+	"info": {
+		"name": "Сведения",
+		"title": "О приложении",
+		"program-name": "ProgOpener project",
+		"program-version": "Версия"
+	}
 }

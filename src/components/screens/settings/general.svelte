@@ -1,5 +1,5 @@
 <script>
-	import i18n, { lang } from '@/utils/languageSwapper';
+	import { lang, i18n } from '@/utils/languageSwapper';
 	import Dropdown from '@/components/ui/dropdown.svelte';
 	import Chips from '@/components/ui/chips.svelte';
 	import Toggle from '@/components/ui/toggle.svelte';
@@ -7,15 +7,15 @@
 	import SettingsCard from '@/components/ui/settings/settingsCard.svelte';
 </script>
 
-<SettingsLayout title="Общие">
-	<SettingsCard icon="language" title={$i18n.t('lang')}>
+<SettingsLayout title={$i18n.t("general.title")}>
+	<SettingsCard icon="language" title={$i18n.t('general.language')}>
 		<Dropdown>
 			<Chips radio isCheck={$lang == 'ru'} on:check={() => ($lang = 'ru')} text="Русский" />
 			<Chips radio isCheck={$lang == 'en'} on:check={() => ($lang = 'en')} text="English" />
 		</Dropdown>
 	</SettingsCard>
 
-	<SettingsCard icon="startup" title={$i18n.t('add-to-startup')}>
+	<SettingsCard icon="startup" title={$i18n.t('general.add-to-startup')}>
 		{#await window.startup.isEnabled}
 			<Toggle />
 		{:then value}

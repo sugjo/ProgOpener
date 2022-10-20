@@ -8,6 +8,7 @@
 		removeSettingItem
 	} from '@/services/settings.service';
 	import settingsStore from '@/stores/settingsStore';
+	import { i18n } from '@/utils/languageSwapper';
 
 	const addPathHandler = () => {
 		window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
@@ -38,10 +39,10 @@
 	};
 </script>
 
-<SettingsLayout title="Пути поиска">
+<SettingsLayout title={$i18n.t('paths.title')}>
 	<div class="add-path">
-		Нужно больше путей?
-		<Button on:click={addPathHandler}>Добавьте</Button>
+		{$i18n.t('paths.add-paths-title')}
+		<Button on:click={addPathHandler}>{$i18n.t('paths.add')}</Button>
 	</div>
 	<div class="paths">
 		{#each $settingsStore.paths || [] as { path, disabled }}
@@ -53,7 +54,7 @@
 				on:delete={() => removePathHandler(path)}
 			/>
 		{:else}
-			Пусто
+			<small>{$i18n.t('paths.empty')}</small>
 		{/each}
 	</div>
 </SettingsLayout>
@@ -69,5 +70,9 @@
 		gap: 5px;
 		width: 100%;
 		height: 100%;
+	}
+
+	.paths::first-letter {
+		text-transform: uppercase;
 	}
 </style>

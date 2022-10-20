@@ -30,7 +30,7 @@ i18next
             order: ['cookie', 'localStorage', 'htmlTag', 'path', 'subdomain'],
             caches: ['cookie']
         },
-        debug: true,
+        debug: false,
         backend: {
             loadPath: `${window.api.getLangPath()}/{{lng}}.json`
         }
@@ -40,4 +40,4 @@ lang.subscribe(async (value) => {
     i18next.changeLanguage(value)
 })
 
-export default createI18nStore(i18next);
+export const i18n = createI18nStore(i18next);
