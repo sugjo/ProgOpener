@@ -6,7 +6,7 @@ module.exports = async function (paths) {
     let findedFiles = [];
 
     for await (const { path, disabled } of paths) {
-        if (disabled) return
+        if (disabled) continue
         const files = await fs.readdir(path)
         findedFiles.push(...files.map((e) => { return { name: e, path } }));
     }
