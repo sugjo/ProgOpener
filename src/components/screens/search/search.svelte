@@ -29,7 +29,7 @@
 			type="text"
 		/>
 		<div class="search-icon" class:focus={isFocus}>
-			<Icon src="public://images/search.svg" />
+			<Icon name="search" />
 		</div>
 	</div>
 
