@@ -41,9 +41,7 @@
 <SettingsLayout title="Пути поиска">
 	<div class="add-path">
 		Нужно больше путей?
-		<Button on:click={addPathHandler}>
-			<span>Добавьте</span>
-		</Button>
+		<Button on:click={addPathHandler}>Добавьте</Button>
 	</div>
 	<div class="paths">
 		{#each $settingsStore.paths || [] as { path, disabled }}
@@ -61,9 +59,8 @@
 </SettingsLayout>
 
 <style>
-	.add-path span {
-		color: var(--active-color);
-		font-weight: 600;
+	.add-path {
+		--color: var(--active-color);
 	}
 
 	.paths {
