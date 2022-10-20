@@ -8,6 +8,7 @@
 
 <style>
 	.icon {
+		color: var(--color);
 		user-select: none;
 		height: var(--icon-height);
 		width: var(--icon-width);
