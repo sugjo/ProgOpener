@@ -6,7 +6,7 @@
 
 <SettingsLayout title={$i18n.t('about')}>
 	<SettingsCard
-		src="public://images/ProgOpener.svg"
+		icon="ProgOpener"
 		title="ProgOpener"
 		body="{$i18n.t('version')}: {window.api.version}"
 	/>

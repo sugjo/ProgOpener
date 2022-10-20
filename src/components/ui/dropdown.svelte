@@ -1,6 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import clickOutside from '../../utils/clickOutside';
+	import Icon from './icon.svelte';
 
 	let isCheck = false;
 
@@ -11,9 +12,9 @@
 
 <div class="dropdown-btn" class:check={isCheck} on:click|stopPropagation={clickHandler}>
 	{#if isCheck}
-		<img src="public://images/expand_less.svg" alt="" />
+		<Icon name="expand_less" />
 	{:else}
-		<img src="public://images/expand_more.svg" alt="" />
+		<Icon name="expand_more" />
 	{/if}
 </div>
 {#if isCheck}
@@ -52,10 +53,5 @@
 		width: 100%;
 		background-color: var(--background-active);
 		padding: 15px;
-	}
-
-	img {
-		height: 30px;
-		width: 30px;
 	}
 </style>

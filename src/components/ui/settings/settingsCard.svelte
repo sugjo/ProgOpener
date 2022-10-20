@@ -3,11 +3,11 @@
 
 	export let title;
 	export let body = '';
-	export let src;
+	export let icon;
 </script>
 
 <div class="settings-card" class:titleOnly={!body}>
-	<Icon {src} />
+	<Icon name={icon} />
 	<div class="title">
 		{title}
 	</div>

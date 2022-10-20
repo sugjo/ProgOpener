@@ -5,17 +5,17 @@ import Paths from '@/components/screens/settings/paths.svelte';
 export const categories = [
 	{
 		name: 'Пути',
-		icon: 'public://images/folder.svg',
+		icon: 'folder',
 		component: Paths
 	},
 	{
 		name: 'Общие',
-		icon: 'public://images/settings.svg',
+		icon: 'settings',
 		component: General
 	},
 	{
 		name: 'Сведения',
-		icon: 'public://images/info.svg',
+		icon: 'info',
 		component: Info
 	}
 ];

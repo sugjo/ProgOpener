@@ -16,7 +16,7 @@
 				<li class:active={currentCategory == component}>
 					<Button on:click={() => dispatch('change', component)} --border-radius="0">
 						<div class="aside-item-body">
-							<Icon src={icon} />
+							<Icon name={icon} />
 							{name}
 						</div>
 					</Button>

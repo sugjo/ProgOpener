@@ -1,4 +1,6 @@
 <script>
+	import Icon from './icon.svelte';
+
 	export let icon = null;
 	export let focus = false;
 	export let title = null;
@@ -18,10 +20,9 @@
 >
 	<div
 		class="button-body {$$slots.default && !icon ? 'text-only' : ''}"
-		style={$$slots.default ? 'padding-right: 10px;' : ''}
 	>
 		{#if icon}
-			<img draggable="false" src={icon} alt="" />
+			<Icon name={icon} --icon-height="20px" --icon-width="20px" />
 		{/if}
 		<slot />
 	</div>
@@ -31,7 +32,7 @@
 	button {
 		border-radius: var(--border-radius);
 		transition: 0.2s;
-		padding: 0;
+		padding: 5px;
 		border: 2px solid transparent;
 	}
 
@@ -53,19 +54,10 @@
 		filter: brightness(0.5);
 	}
 
-	.text-only {
-		padding: 5px 10px;
-	}
-
 	.button-body {
+		color: var(--color);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-
-	img {
-		height: 30px;
-		padding: 5px;
-		width: auto;
 	}
 </style>

@@ -1,16 +1,17 @@
 <script>
-	export let src;
+	export let name;
 </script>
 
-<img class="icon" {src} draggable="false" alt="" />
+<svg class="icon" aria-hidden="true">
+	<use href="#icon-{name}" fill="currentColor" />
+</svg>
 
 <style>
-	img {
-		user-select: none;
-		height: 32px;
-		width: 32px;
-	}
 	.icon {
+		user-select: none;
+		height: var(--icon-height);
+		width: var(--icon-width);
 		margin: 0;
+		padding: 0;
 	}
 </style>

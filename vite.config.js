@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import path, { resolve } from 'path'
 
@@ -21,5 +22,21 @@ export default defineConfig({
 		},
 	},
 	base: "./",
-	plugins: [svelte()]
+	plugins: [
+		svelte(),
+		createSvgIconsPlugin({
+			// Specify the icon folder to be cached
+			iconDirs: [path.resolve(process.cwd(), 'public/images')],
+			// Specify symbolId format
+			symbolId: 'icon-[dir]-[name]',
+			svgoOptions: {
+				plugins: [
+					{
+						name: "removeAttrs",
+						params: { attrs: "fill" }
+					}
+				]
+			}
+		}),
+	]
 })
