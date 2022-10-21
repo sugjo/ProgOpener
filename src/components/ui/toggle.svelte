@@ -16,12 +16,12 @@
 	};
 </script>
 
-<div class="toggle" class:check={isCheck} on:click={clickHandler}>
+<button class:check={isCheck} on:click={clickHandler}>
 	<div class="circle" />
-</div>
+</button>
 
 <style>
-	.toggle {
+	button {
 		display: flex;
 		justify-content: flex-start;
 		border: var(--border-hover);
@@ -29,7 +29,16 @@
 		border-radius: 25px;
 		user-select: none;
 		font-size: 14px;
-        padding: 2px;
+		padding: 2px;
+	}
+
+	button:hover {
+		background-color: var(--background-hover);
+	}
+
+	button:focus {
+		background: var(--background-hover);
+		border: 2px solid var(--active-color);
 	}
 
 	.circle {
@@ -42,10 +51,6 @@
 
 	.check .circle {
 		background-color: var(--active-color);
-	}
-
-	.toggle:hover {
-		background-color: var(--background-hover);
 	}
 
 	.check {
