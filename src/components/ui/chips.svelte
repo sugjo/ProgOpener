@@ -18,12 +18,12 @@
 	};
 </script>
 
-<div class="chips" class:check={isCheck} on:click={clickHandler}>
+<button class:check={isCheck} on:click={clickHandler}>
 	{text}
-</div>
+</button>
 
 <style>
-	.chips {
+	button {
 		border: var(--border-hover);
 		padding: 5px 16px;
 		border-radius: 25px;
@@ -32,11 +32,17 @@
 		transition: 0.1s;
 	}
 
-	.chips:hover {
+	button:hover {
 		background-color: var(--background-hover);
 	}
 
+	button:focus {
+		background: var(--background-hover);
+		border: 2px solid var(--active-color);
+	}
+
 	.check {
-		border: var(--border-active);
+		background-color: var(--active-color);
+		border-color: var(--active-color);
 	}
 </style>

@@ -1,5 +1,5 @@
 <script>
-	import Icon from "@/components/ui/icon.svelte";
+	import Icon from '@/components/ui/icon.svelte';
 
 	export let title;
 	export let body = '';
@@ -25,7 +25,7 @@
 	.settings-card {
 		position: relative;
 		display: grid;
-		grid-template-columns: min-content 1fr;
+		grid-template-columns: 32px 1fr;
 		align-items: center;
 		grid-template-areas:
 			'icon title btns'
