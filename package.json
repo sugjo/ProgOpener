@@ -35,6 +35,7 @@
 		"electron-window-state": "^5.0.3",
 		"emulate-key-in-browser": "^1.0.0-rc.1",
 		"extract-file-icon": "^0.3.2",
+		"fuse.js": "^6.6.2",
 		"i18next": "^21.8.16",
 		"i18next-browser-languagedetector": "^6.1.4",
 		"i18next-http-backend": "^1.4.1",

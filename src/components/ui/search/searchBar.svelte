@@ -6,9 +6,9 @@
 </script>
 
 <div class="search-result" transition:fly={{ duration: 120, y: -15 }}>
-	{#each searchResult || [] as { name, path }}
-		{#if name && path}
-			<SearchItem {name} {path} on:openApp />
+	{#each searchResult || [] as file}
+		{#if file}
+			<SearchItem {file} on:openApp />
 		{/if}
 	{/each}
 </div>

@@ -2,33 +2,33 @@
 	import { createEventDispatcher } from 'svelte';
 	import Icon from '../icon.svelte';
 
-	export let name;
-	export let path;
+	export let file;
 
 	let error = false;
 
-	let loadErrorHandler = (e, name) => {
-		if (e.target.currentSrc == `icons://${name}.png`) return (error = true);
+	let loadErrorHandler = (e) => {
+		if (e.target.currentSrc == `icons://${iconName}.png`) return (error = true);
 		return (error = false);
 	};
 
-	$: iconName = (name) => window?.path.basename(name).replace(window?.path.extname(name), '');
+	$: name = window?.path.parse(file.item).name
+	$: iconName = window?.path.parse(file.item).base
 
 	const dispatch = createEventDispatcher();
-	const openAppHandler = (name, path) => dispatch('openApp', `"${path}\\${name}"`);
+	const openAppHandler = (file) => dispatch('openApp', `"${file}"`);
 </script>
 
-<button on:click|stopPropagation={() => openAppHandler(name, path)}>
+<button on:click|stopPropagation={() => openAppHandler(file.item)}>
 	{#if error}
 		<Icon name="empty" />
 	{:else}
 		<img
-			src="icons://{name}.png"
-			alt="{iconName(name)} icon"
-			on:error={(e) => loadErrorHandler(e, name)}
+			src="icons://{iconName}.png"
+			alt="{name} icon"
+			on:error={(e) => loadErrorHandler(e)}
 		/>
 	{/if}
-	{iconName(name)}
+	{name}
 </button>
 
 <style>

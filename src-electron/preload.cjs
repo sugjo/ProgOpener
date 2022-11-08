@@ -40,6 +40,7 @@ contextBridge.exposeInMainWorld('startup', {
 })
 
 contextBridge.exposeInMainWorld('path', {
+    parse: (p) => path.parse(p),
     basename: (p) => path.basename(p),
     extname: (p) => path.extname(p),
 })
