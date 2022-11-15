@@ -1,5 +1,5 @@
 const { isAppQuitting } = require("./utils/appState.cjs");
-const { BrowserWindow, dialog, ipcMain } = require("electron");
+const { BrowserWindow } = require("electron");
 const { isDev, port } = require("./utils/index.cjs");
 const path = require('path');
 
@@ -28,15 +28,6 @@ function createSettingsWindow() {
 
         return false;
     });
-    ipcMain.handle('dialog: openDirectorySelect', async () => {
-        let options = {
-            properties: ['openDirectory']
-        };
-
-        const result = await dialog.showOpenDialog(settingsWindow, options);
-        if (result.canceled) { return; }
-        return result.filePaths;
-    })
 
     const uiUrl = isDev
         ? `http://127.0.0.1:${port}/src/pages/settings.html`

@@ -17,7 +17,6 @@
 	onMount(() => window.api.load());
 
 	window.api.receive('loaded', ({ programsList }) => {
-		programsList = programsList.map((program) => `${program.path}\\${program.name}`);
 		files = new Fuse(programsList);
 	});
 

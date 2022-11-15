@@ -2,55 +2,54 @@
 	import SettingsLayout from '@/components/layout/settingsLayout.svelte';
 	import Button from '@/components/ui/button.svelte';
 	import PathItem from '@/components/ui/settings/pathItem.svelte';
-	import {
-		addSettingItem,
-		changeSettingItem,
-		removeSettingItem
-	} from '@/services/settings.service';
-	import settingsStore from '@/stores/settingsStore';
+	import { removeSettingItem } from '@/services/settings.service';
 	import { i18n } from '@/utils/languageSwapper';
 
-	const addPathHandler = () => {
-		window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
-			if (!newPath) return;
-			addSettingItem('paths', { path: newPath[0], disabled: false });
-		});
-	};
+	let paths = [];
+
+	// const addPathHandler = () => {
+	// 	window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
+	// 		if (!newPath) return;
+	// 		addSettingItem('paths', { path: newPath[0], disabled: false });
+	// 	});
+	// };
+
+	window.api.receive('folderSystem: paths', (newPaths) => console.log("updated"));
 
 	const removePathHandler = (pathToRemove) => {
 		removeSettingItem('paths', ({ path }) => pathToRemove != path);
 	};
 
-	const togglePathHandler = (pathToToggle, status) => {
-		changeSettingItem('paths', ({ path }) => pathToToggle == path, {
-			path: pathToToggle,
-			disabled: !status
-		});
-	};
+	// const togglePathHandler = (pathToToggle, status) => {
+	// 	changeSettingItem('paths', ({ path }) => pathToToggle == path, {
+	// 		path: pathToToggle,
+	// 		disabled: !status
+	// 	});
+	// };
 
-	const changePathHandler = (pathToChange) => {
-		window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
-			if (!newPath) return;
-			changeSettingItem('paths', ({ path }) => pathToChange == path, {
-				path: newPath[0],
-				disabled: false
-			});
-		});
-	};
+	// const changePathHandler = (pathToChange) => {
+	// 	window.api.invoke('dialog: openDirectorySelect').then((newPath) => {
+	// 		if (!newPath) return;
+	// 		changeSettingItem('paths', ({ path }) => pathToChange == path, {
+	// 			path: newPath[0],
+	// 			disabled: false
+	// 		});
+	// 	});
+	// };
 </script>
 
 <SettingsLayout title={$i18n.t('paths.title')}>
 	<div class="add-path">
 		{$i18n.t('paths.add-paths-title')}
-		<Button on:click={addPathHandler}>{$i18n.t('paths.add')}</Button>
+		<Button on:click={() => window.folderSystem.addFolder()}>{$i18n.t('paths.add')}</Button>
 	</div>
 	<div class="paths">
-		{#each $settingsStore.paths || [] as { path, disabled }}
+		{#each paths || [] as { path, disabled }}
 			<PathItem
 				{path}
 				{disabled}
-				on:toggle={() => togglePathHandler(path, disabled)}
-				on:change={() => changePathHandler(path)}
+				on:toggle={() => window.folderSystem.toggleFolder(path, disabled)}
+				on:change={() => window.folderSystem.changeFolder(path)}
 				on:delete={() => removePathHandler(path)}
 			/>
 		{:else}
