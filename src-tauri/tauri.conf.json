@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "ProgOpener",
+    "productName": "prog_opener",
     "version": "0.0.0"
   },
   "tauri": {
@@ -54,10 +54,21 @@
     },
     "windows": [
       {
+        "label": "search",
+        "url": "search",
+        "title": "Search",
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "ProgOpener",
+        "width": 800
+      },
+      {
+        "label": "settings",
+        "url": "settings",
+        "title": "Settings",
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
         "width": 800
       }
     ]
