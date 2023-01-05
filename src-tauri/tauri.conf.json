@@ -10,6 +10,10 @@
     "version": "0.0.0"
   },
   "tauri": {
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
     "allowlist": {
       "all": true
     },
@@ -57,6 +61,7 @@
         "label": "search",
         "url": "search",
         "title": "Search",
+        "center": true,
         "fullscreen": false,
         "height": 600,
         "resizable": true,
@@ -66,6 +71,7 @@
         "label": "settings",
         "url": "settings",
         "title": "Settings",
+        "visible": false,
         "fullscreen": false,
         "height": 600,
         "resizable": true,
