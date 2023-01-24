@@ -4,14 +4,14 @@
 )]
 
 mod core;
-mod setup;
+mod utils;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
-        .setup(setup::init)
+        .setup(utils::setup::init)
         .system_tray(core::tray::tray_menu())
         .on_system_tray_event(core::tray::on_system_tray_event)
         .on_window_event(|event| match event.event() {
