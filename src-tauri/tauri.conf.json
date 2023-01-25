@@ -62,8 +62,12 @@
         "url": "search",
         "title": "Search",
         "visible": false,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
         "center": true,
-        "fullscreen": false,
+        "fullscreen": true,
         "height": 600,
         "resizable": true,
         "width": 800
