@@ -1,0 +1,17 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    max-height: 100vh;
+
+    padding-top: var(--search-top-padding, 30vh);
+    padding-bottom: var(--search-top-bottom, 15vh);
+}
+
+.search {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+    gap: var(--search-gap, 5px);
+
+    width: var(--search-bar-width, 50%);
+}

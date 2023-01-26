@@ -1,4 +1,4 @@
-use tauri::{window, App, AppHandle, GlobalShortcutManager, Manager};
+use tauri::{App, AppHandle, GlobalShortcutManager, Manager, Window};
 
 #[cfg(target_os = "windows")]
 pub fn init(app: &mut App) -> std::result::Result<(), Box<dyn std::error::Error>> {
@@ -8,13 +8,13 @@ pub fn init(app: &mut App) -> std::result::Result<(), Box<dyn std::error::Error>
 }
 
 fn search_toggle_register(app: AppHandle) {
+    let window = app.get_window("search").unwrap();
     app.global_shortcut_manager()
-        .register("Alt + Space", move || toggle_search(&app))
+        .register("Alt + Space", move || toggle_search(&window))
         .unwrap();
 }
 
-fn toggle_search(app: &AppHandle) {
-    let window = app.get_window("search").unwrap();
+pub fn toggle_search(window: &Window) {
     let is_visible = window.is_visible().unwrap();
 
     if is_visible {

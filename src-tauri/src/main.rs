@@ -24,7 +24,7 @@ fn main() {
             }
             _ => {}
         })
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![core::cmds::toggle_search])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

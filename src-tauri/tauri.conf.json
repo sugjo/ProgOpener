@@ -15,7 +15,14 @@
       "iconAsTemplate": true
     },
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "scope": [
+          "$APPLOCALDATA/*"
+        ]
+      }
     },
     "bundle": {
       "active": true,
@@ -32,7 +39,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "sugjo.ru",
+      "identifier": "ru.sugjo.ocular",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
