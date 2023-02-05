@@ -1,6 +1,8 @@
 import { Button, ScrollArea } from "@mantine/core";
 import React from "react";
 
+import AppIcon from "@/shared/AppIcon";
+
 import Styles from "./ResultBar.module.css";
 
 export type SearchResult = Array<{
@@ -22,7 +24,7 @@ const ResultBar = (props: Props) => {
 						key={name}
 						size='md'
 						color="gray"
-						leftIcon={<img height="30" width="auto" src={ico} alt="" />}
+						leftIcon={<AppIcon name={ico}/>}
 						onClick={() => alert("test")}
 						styles={() => ({
 							inner: {
