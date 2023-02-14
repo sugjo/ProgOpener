@@ -58,7 +58,7 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://icons"
     },
     "updater": {
       "active": false
