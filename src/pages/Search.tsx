@@ -1,41 +1,35 @@
 import { useClickOutside, useFocusTrap, useMergedRef } from "@mantine/hooks";
-import { invoke } from "@tauri-apps/api";
-import { listen } from "@tauri-apps/api/event";
-import React, { useEffect,useState } from "react";
+import React, { useState } from "react";
 
 import ResultBar, { SearchResult } from "@/components/search/ResultBar";
 import SearchBar from "@/components/search/SearchBar";
+import { useWindowToggle } from "@/shared/hooks/useWindowToggle";
 
 import Styles from "./Search.module.css";
 
 function Search() {
-	const [visible, setVisible] = useState(true);
+	const [visible, toggleWindow] = useWindowToggle();
 	const [searchResult, setSearchResult] = useState<SearchResult>([]);
 
-	useEffect(() => {
-		if (!window.__TAURI_IPC__) setVisible(true);
-
-		const unlisten = listen("search_toggled", ({ payload }) => {
-			setVisible(payload as boolean);
-		});
-
-		return () => { unlisten.then((f) => f()); };
-	}, []);
-
 	const focusTrap = useFocusTrap();
-	const clickOutside = useClickOutside(() => invoke("toggle_search"));
+	const clickOutside = useClickOutside(toggleWindow);
 	const searchRef = useMergedRef<HTMLDivElement>(clickOutside, focusTrap);
 
 	const searchHandler = (e: string) => {
 		setSearchResult([
 			{
-				ico: "/vite.svg",
-				name: "Vite",
+				ico: "Genshin Impact.png",
+				name: "Genshin Impact",
 				path: ""
 			},
 			{
-				ico: "/tauri.svg",
-				name: "tauri",
+				ico: "Discord.png",
+				name: "Discord",
+				path: ""
+			},
+			{
+				ico: "League of Legends.png",
+				name: "League of Legends",
 				path: ""
 			}
 		]);
