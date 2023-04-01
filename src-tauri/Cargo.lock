@@ -1738,9 +1738,9 @@ checksum = "478c572c3d73181ff3c2539045f6eb99e5491218eae919370993b890cdbdd98e"
 
 [[package]]
 name = "pest"
-version = "2.5.2"
+version = "2.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f6e86fb9e7026527a0d46bc308b841d73170ef8f443e1807f6ef88526a816d4"
+checksum = "028accff104c4e513bad663bbcd2ad7cfd5304144404c31ed0a77ac103d00660"
 dependencies = [
  "thiserror",
  "ucd-trie",
@@ -1958,7 +1958,6 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
- "tauri-plugin-store",
 ]
 
 [[package]]
@@ -2743,18 +2742,6 @@ dependencies = [
  "syn",
  "tauri-codegen",
  "tauri-utils",
-]
-
-[[package]]
-name = "tauri-plugin-store"
-version = "0.1.0"
-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=dev#4ff7843581aced66b2c4e21a64e514e255b41cc4"
-dependencies = [
- "log",
- "serde",
- "serde_json",
- "tauri",
- "thiserror",
 ]
 
 [[package]]

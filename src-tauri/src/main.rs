@@ -15,7 +15,6 @@ mod utils;
 
 fn main() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_store::Builder::default().build())
         .setup(utils::setup::init)
         .system_tray(core::tray::tray_menu())
         .on_system_tray_event(core::tray::on_system_tray_event)
