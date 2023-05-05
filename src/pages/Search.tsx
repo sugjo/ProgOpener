@@ -1,19 +1,13 @@
-import { useClickOutside, useFocusTrap, useMergedRef } from "@mantine/hooks";
 import { useState } from "react";
 
 import ResultBar, { SearchResult } from "@/components/search/ResultBar";
 import SearchBar from "@/components/search/SearchBar";
-import { useWindowToggle } from "@/shared/hooks/useWindowToggle";
+import { PromptToggle } from "@/features/prompt-toggle";
 
 import Styles from "./Search.module.css";
 
 function Search() {
-	const [visible, toggleWindow] = useWindowToggle();
 	const [searchResult, setSearchResult] = useState<SearchResult>([]);
-
-	const focusTrap = useFocusTrap();
-	const clickOutside = useClickOutside(toggleWindow);
-	const searchRef = useMergedRef<HTMLDivElement>(clickOutside, focusTrap);
 
 	const searchHandler = () => {
 		setSearchResult([
@@ -35,16 +29,15 @@ function Search() {
 		]);
 	};
 
-	if (!visible) return null;
-
 	return (
-		<div className={Styles["search-container"]}>
-			<div ref={searchRef} className={Styles.search}>
-				<SearchBar onChange={searchHandler} />
-				{searchResult && <ResultBar searchResult={searchResult} />}
+		<PromptToggle>
+			<div className={Styles["search-container"]}>
+				<div className={Styles.search}>
+					<SearchBar onChange={searchHandler} />
+					{searchResult && <ResultBar searchResult={searchResult} />}
+				</div>
 			</div>
-		</div>
-
+		</PromptToggle>
 	);
 }
 

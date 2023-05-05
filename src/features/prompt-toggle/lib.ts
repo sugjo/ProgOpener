@@ -1,20 +1,20 @@
 import { invoke } from "@tauri-apps/api";
 import { listen } from "@tauri-apps/api/event";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 
-export const useWindowToggle = (): [boolean, () => void] => {
+export const usePromptToggle = (): [boolean, () => void] => {
 	const [visible, setVisible] = useState(true);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!window.__TAURI_IPC__) setVisible(true);
 
-		const unlisten = listen("search_toggled", ({ payload }) => {
-			setVisible(payload as boolean);
+		const unlisten = listen<boolean>("search_toggled", ({ payload }) => {
+			setVisible(payload);
 		});
 
 		return () => {
-			unlisten.then((f) => f());
+			unlisten.then((f: () => void) => f());
 		};
 	}, []);
 
