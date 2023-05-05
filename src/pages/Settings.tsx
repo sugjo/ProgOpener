@@ -1,5 +1,4 @@
 import { Tabs } from "@mantine/core";
-import React from "react";
 
 import Path from "@/components/settings/ui/Path";
 

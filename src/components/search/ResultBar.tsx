@@ -1,5 +1,4 @@
 import { Button, ScrollArea } from "@mantine/core";
-import React from "react";
 
 import AppIcon from "@/shared/AppIcon";
 
@@ -20,7 +19,7 @@ const ResultBar = (props: Props) => {
 		<ScrollArea type="auto" offsetScrollbars>
 			<div className={Styles["result-bar"]}>
 				{
-					props.searchResult.map(({ ico, name, path }) => <Button
+					props.searchResult.map(({ ico, name }) => <Button
 						key={name}
 						size='md'
 						color="gray"

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { usePaths } from "@/shared/hooks/usePaths";
 
 import { useSettingsPaths } from "../hooks/useSettingsPaths";

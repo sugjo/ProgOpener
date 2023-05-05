@@ -1,5 +1,5 @@
 import { useClickOutside, useFocusTrap, useMergedRef } from "@mantine/hooks";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import ResultBar, { SearchResult } from "@/components/search/ResultBar";
 import SearchBar from "@/components/search/SearchBar";
@@ -15,7 +15,7 @@ function Search() {
 	const clickOutside = useClickOutside(toggleWindow);
 	const searchRef = useMergedRef<HTMLDivElement>(clickOutside, focusTrap);
 
-	const searchHandler = (e: string) => {
+	const searchHandler = () => {
 		setSearchResult([
 			{
 				ico: "Genshin Impact.png",
@@ -40,7 +40,7 @@ function Search() {
 	return (
 		<div className={Styles["search-container"]}>
 			<div ref={searchRef} className={Styles.search}>
-				<SearchBar onChange={e => searchHandler(e.target.value)} />
+				<SearchBar onChange={searchHandler} />
 				{searchResult && <ResultBar searchResult={searchResult} />}
 			</div>
 		</div>
