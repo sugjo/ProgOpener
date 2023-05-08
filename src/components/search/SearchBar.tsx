@@ -2,7 +2,7 @@ import { TextInput } from "@mantine/core";
 import { useWindowEvent } from "@mantine/hooks";
 import React, { useRef } from "react";
 
-import Icon from "@/shared/Icon";
+import { Icon } from "@/shared/ui";
 
 import Styles from "./SearchBar.module.css";
 
