@@ -11,7 +11,7 @@ export const withTheme = ({ component }: Props) => {
 			withCSSVariables
 			withGlobalStyles
 			theme={{
-				globalStyles: () => ({ body: { backgroundColor: "var(--search-background, rgba(0, 0, 0, 0.3))" } }),
+				globalStyles: () => ({ body: { backgroundColor: "transparent" } }),
 				colorScheme: "dark"
 			}}
 		>

@@ -2,7 +2,7 @@ import { Tabs } from "@mantine/core";
 
 import Path from "@/components/settings/ui/Path";
 
-function Settings() {
+export const SettingsPage = () => {
 	return (
 		<>
 			<Tabs defaultValue="paths" orientation="vertical" variant="outline">
@@ -21,6 +21,4 @@ function Settings() {
 
 		</>
 	);
-}
-
-export default Settings;
+};

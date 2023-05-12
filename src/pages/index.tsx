@@ -1,17 +1,15 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 
-import Search from "./Search";
-import Settings from "./Settings";
+import { PromptPage } from "./Prompt";
+import { SettingsPage } from "./Settings";
 
-function Router() {
+export const Router = () => {
 	const router = createBrowserRouter(createRoutesFromElements(
 		<Route>
-			<Route path="search" element={<Search />} />
-			<Route path="settings" element={<Settings />} />
+			<Route path="prompt" element={<PromptPage />} />
+			<Route path="settings" element={<SettingsPage />} />
 		</Route>
 	));
 
 	return <RouterProvider router={router} />;
-}
-
-export default Router;
+};

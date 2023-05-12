@@ -65,9 +65,9 @@
     },
     "windows": [
       {
-        "label": "search",
-        "url": "search",
-        "title": "Search",
+        "label": "prompt",
+        "url": "prompt",
+        "title": "Prompt",
         "visible": false,
         "transparent": true,
         "decorations": false,

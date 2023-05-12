@@ -1,8 +1,8 @@
 use tauri::Window;
 
-use crate::utils::setup;
+use super::prompt::set_toggle;
 
 #[tauri::command]
-pub fn toggle_search(window: Window){
-    setup::toggle_search(&window);
+pub fn set_prompt_toggle(window: Window, value: bool) {
+    set_toggle(&window, value);
 }

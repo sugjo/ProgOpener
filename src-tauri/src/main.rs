@@ -8,6 +8,7 @@ use std::fs::read;
 use tauri::api::path::{resolve_path, BaseDirectory};
 use tauri::http::{Request, ResponseBuilder};
 use tauri::{AppHandle, Manager};
+
 mod core;
 mod utils;
 
@@ -20,7 +21,7 @@ fn main() {
         .on_system_tray_event(core::tray::on_system_tray_event)
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::CloseRequested { api, .. } => {
-                if event.window().label() != "search" {
+                if event.window().label() != "prompt" {
                     return;
                 };
                 event.window().hide().unwrap();
@@ -28,7 +29,7 @@ fn main() {
             }
             _ => {}
         })
-        .invoke_handler(tauri::generate_handler![core::cmds::toggle_search])
+        .invoke_handler(tauri::generate_handler![core::cmds::set_prompt_toggle])
         .register_uri_scheme_protocol("ocular", icon_protocol)
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
