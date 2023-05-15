@@ -1,11 +1,7 @@
 import { MantineProvider } from "@mantine/core";
 
-type Props = {
-	component: () => React.ReactNode;
-}
-
-export const withTheme = ({ component }: Props) => {
-	return (
+export const withTheme = (Component: React.ComponentType) => {
+	return () => (
 		<MantineProvider
 			withNormalizeCSS
 			withCSSVariables
@@ -15,7 +11,7 @@ export const withTheme = ({ component }: Props) => {
 				colorScheme: "dark"
 			}}
 		>
-			{ component() }
+			<Component />
 		</MantineProvider>
 	);
 };
