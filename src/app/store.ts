@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { FLUSH, PAUSE, PERSIST, persistStore,PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import { FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE  } from "redux-persist";
 import { createStateSyncMiddleware } from "redux-state-sync";
 
 import { promptModel } from "@/entities/prompt";
@@ -14,7 +14,7 @@ const defaultMiddlewareConfig = {
 };
 
 const stateSyncMiddlewareConfig = {
-	blacklist: reducerBlacklist
+	blacklist: reducerBlacklist,
 };
 
 const reducer = combineReducers({
@@ -26,7 +26,7 @@ export const store = configureStore({
 	reducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware(defaultMiddlewareConfig)
-			.prepend(createStateSyncMiddleware(stateSyncMiddlewareConfig)),
+			.concat(createStateSyncMiddleware(stateSyncMiddlewareConfig)),
 	devTools: true
 });
 
