@@ -1,6 +1,6 @@
 import { open } from "@tauri-apps/api/dialog";
 
-import { createTypedAsyncThunk } from "@/shared/store";
+import { createTypedAsyncThunk } from "@/shared/lib/store";
 
 import { pathSlice } from "../model";
 
