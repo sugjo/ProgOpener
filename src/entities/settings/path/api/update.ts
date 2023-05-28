@@ -5,7 +5,7 @@ import { createTypedAsyncThunk } from "@/shared/lib/store";
 import { pathSlice } from "../model";
 
 export const update = createTypedAsyncThunk<void, string>(
-	"path/updateThunk",
+	"settings/path/updateThunk",
 	async (id, { getState, dispatch }) => {
 		const { pathsMap } = getState().settings.path;
 		const path = await open({

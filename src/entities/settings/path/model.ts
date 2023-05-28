@@ -9,7 +9,7 @@ const initialState: Paths = {
 };
 
 export const pathSlice = createSlice({
-	name: "path",
+	name: "settings/path",
 	initialState,
 	reducers: {
 		delete: (state, action: PayloadAction<string>) => {

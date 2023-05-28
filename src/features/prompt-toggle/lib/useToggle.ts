@@ -14,6 +14,10 @@ export const useToggle = () => {
 			setVisible(payload);
 		});
 
+		const updateUnlisten = listen("settings_update", () => {
+			window.location.reload();
+		});
+
 		const blurUnlisten = getCurrent().onFocusChanged(({ payload }) => {
 			if (payload === false) {
 				setToggle(payload);
@@ -24,6 +28,7 @@ export const useToggle = () => {
 		return () => {
 			toggleUnlisten.then((f: () => void) => f());
 			blurUnlisten.then((f: () => void) => f());
+			updateUnlisten.then((f: () => void) => f());
 		};
 	}, []);
 
