@@ -1,6 +1,6 @@
 import { Center } from "@mantine/core";
 
-export const ResultListEmpty = () => {
+export const ListEmpty = () => {
 	return (
 		<Center
 			component="div"

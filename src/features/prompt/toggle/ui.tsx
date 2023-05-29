@@ -1,12 +1,8 @@
 import { useFocusTrap } from "@mantine/hooks";
 
-import { useToggle } from "./lib/useToggle";
+import { useToggle } from "./model/useToggle";
 
-interface Props {
-    children: React.ReactNode;
-}
-
-export const Toggle = ({children}: Props) => {
+export const Toggle = ({ children }: React.PropsWithChildren) => {
 
 	const [ visible ] = useToggle();
 	const focusTrap = useFocusTrap();

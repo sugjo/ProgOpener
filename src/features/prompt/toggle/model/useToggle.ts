@@ -2,7 +2,7 @@ import { listen } from "@tauri-apps/api/event";
 import { getCurrent } from "@tauri-apps/api/window";
 import { useLayoutEffect, useState } from "react";
 
-import { setToggle } from ".";
+import { setToggle } from "./setToggle";
 
 export const useToggle = () => {
 	const [visible, setVisible] = useState(true);

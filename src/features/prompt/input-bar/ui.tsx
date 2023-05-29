@@ -5,7 +5,6 @@ import { Icon } from "@/shared/ui";
 
 type Props = {
 	onChange: React.ChangeEventHandler<HTMLInputElement>;
-
 }
 
 const useStyles = createStyles(() => ({

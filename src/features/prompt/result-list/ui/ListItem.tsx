@@ -21,13 +21,12 @@ const useStyles = createStyles((theme) => ({
 	}
 }));
 
-export const ResultListItem = forwardRef<HTMLButtonElement, Props>(({ item, active, onClick }: Props, ref) => {
+export const ListItem = forwardRef<HTMLButtonElement, Props>(({ item, active, onClick }: Props, ref) => {
 
 	const { classes, cx } = useStyles();
 
 	return (
 		<Button
-
 			ref={ref}
 			aria-current={ active }
 			variant="subtle"

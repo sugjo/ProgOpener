@@ -1,6 +1,7 @@
-import { createStyles } from "@mantine/core";
+import { createStyles,Overlay } from "@mantine/core";
 
-import { PromptToggle } from "@/features/prompt-toggle";
+import { PromptSync } from "@/features/prompt/sync";
+import { PromptToggle, toggleModel } from "@/features/prompt/toggle";
 import { PromptBar } from "@/widgets/prompt-bar";
 
 const useStyles = createStyles((theme) => ({
@@ -17,11 +18,20 @@ const useStyles = createStyles((theme) => ({
 export const PromptPage = () => {
 	const { classes } = useStyles();
 
+	const closeHandler = () => toggleModel.setToggle(false);
+
 	return (
 		<div className={classes.promptContainer}>
-			<PromptToggle>
-				<PromptBar/>
-			</PromptToggle>
+			<PromptSync>
+				<PromptToggle>
+					<PromptBar />
+					<Overlay
+						opacity={0.5}
+						zIndex="var(--ui-index-3)"
+						onClick={closeHandler}
+					/>
+				</PromptToggle>
+			</PromptSync>
 		</div>
 	);
 };
