@@ -1,7 +1,7 @@
 import { settingsModel } from "@/entities/settings";
 import { useActionCreators, useTypedSelector } from "@/shared/lib/store";
 
-const Path = () => {
+export const Paths = () => {
 	const {	pathsIds, pathsMap } = useTypedSelector((store) => store.settings.path);
 	const actions = useActionCreators(settingsModel.actions.path);
 
@@ -33,5 +33,3 @@ const Path = () => {
 		</>
 	);
 };
-
-export default Path;
