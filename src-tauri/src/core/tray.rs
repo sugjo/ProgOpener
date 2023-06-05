@@ -33,6 +33,8 @@ pub fn on_system_tray_event(app: &AppHandle, event: SystemTrayEvent) {
                     tauri::WindowUrl::App("settings".into()),
                 )
                 .title("Settings")
+                .inner_size(500.0, 600.0)
+                .resizable(false)
                 .center()
                 .build()
                 .unwrap();

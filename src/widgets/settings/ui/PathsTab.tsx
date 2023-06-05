@@ -1,38 +1,56 @@
-import { Button } from "@mantine/core";
+import { createStyles,Flex, Tooltip } from "@mantine/core";
 
-import { settingsModel } from "@/entities/settings";
-import { useActionCreators, useTypedSelector } from "@/shared/lib/store";
+import { AddSettingsPath, EditSettingsPath, RemoveSettingsPath, ToggleSettingsPath } from "@/features/settings/path";
+import { useTypedSelector } from "@/shared/lib/store";
+
+const useStyles = createStyles((theme) => ({
+	pathTab: {
+		display: "flex",
+		flexDirection: "column",
+		gap: theme.spacing.lg
+	},
+	path: {
+		display: "grid",
+		gridTemplateColumns: "min-content 1fr min-content",
+		alignItems: "center",
+		gap: theme.spacing.xs
+	},
+	pathText: {
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		lineClamp: 1,
+	}
+}));
 
 export const PathsTab = () => {
+	const { classes } = useStyles();
 	const {	pathsIds, pathsMap } = useTypedSelector((store) => store.settings.path);
-	const actions = useActionCreators(settingsModel.actions.path);
-
-	const changeHandler = (id: string) => () => actions.updateThunk(id);
-	const deleteHandler = (id: string) => () => actions.delete(id);
-	const addHandler = () => actions.addThunk();
-	const toggleHandler = (id: string) => () => actions.toggle(id);
-
-	const pathsList = pathsIds.map((id) => {
-		const status = pathsMap[id].status;
-		const isActive = pathsMap[id].status === "on";
-
-		return (
-			<li key={id}>
-				<button disabled={status === "error"} onClick={toggleHandler(id)}>
-					{isActive? "✅" : "☑️"}
-				</button>
-				{pathsMap[id].path}
-				<button onClick={deleteHandler(id)}>delete</button>
-				<button onClick={changeHandler(id)}>change</button>
-			</li>
-		);
-	});
 
 	return (
-		<>
-			<Button onClick={addHandler} w="100%">Добавить</Button>
+		<div className={classes.pathTab}>
+			<AddSettingsPath/>
 
-			<ul>{pathsList}</ul>
-		</>
+			<Flex direction="column" gap="xs">
+				{pathsIds.map((id) => (
+					<div key={id} className={classes.path}>
+						<ToggleSettingsPath id={id}/>
+						<Tooltip
+							label={pathsMap[id].path}
+							color="blue"
+							position="bottom-start"
+							withArrow
+						>
+							<div className={classes.pathText}>
+								{pathsMap[id].path.replaceAll(" ", " ")}
+							</div>
+						</Tooltip>
+						<Flex gap="xs">
+							<EditSettingsPath id={id}/>
+							<RemoveSettingsPath id={id}/>
+						</Flex>
+					</div>
+				))}
+			</Flex>
+		</div>
 	);
 };

@@ -1,6 +1,6 @@
 export type Path = {
 	path: string;
-	status: "on" | "off" | "error";
+	isActive: boolean;
 };
 
 export type Paths = {

@@ -12,7 +12,7 @@ export const pathSlice = createSlice({
 	name: "settings/path",
 	initialState,
 	reducers: {
-		delete: (state, action: PayloadAction<string>) => {
+		remove: (state, action: PayloadAction<string>) => {
 			delete state.pathsMap[action.payload];
 			state.pathsIds = state.pathsIds.filter((id) => id !== action.payload);
 		},
@@ -20,13 +20,15 @@ export const pathSlice = createSlice({
 			const { id, newPath } = action.payload;
 			state.pathsMap[id] = { ...state.pathsMap[id], ...newPath };
 		},
-		toggle: ({ pathsMap }, { payload: id }: PayloadAction<string>) => {
-			const isError = pathsMap[id].status === "error";
-			const isOn = pathsMap[id].status === "on";
-
-			if(isError) return;
-
-			pathsMap[id].status = isOn? "off" : "on";
+		toggle: (
+			{ pathsMap },
+			{ payload: { id, value } }: PayloadAction<{ id: string, value: boolean | undefined }>
+		) => {
+			if (value) {
+				pathsMap[id].isActive = value;
+			} else {
+				pathsMap[id].isActive = !pathsMap[id].isActive;
+			}
 		}
 	},
 	extraReducers: (builder) => {
@@ -36,7 +38,7 @@ export const pathSlice = createSlice({
 
 				const id = crypto.randomUUID();
 				state.pathsIds.push(id);
-				state.pathsMap[id] = { path: payload, status: "on" };
+				state.pathsMap[id] = { path: payload, isActive: true };
 			});
 	},
 });
