@@ -1,6 +1,6 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
-import { addThunk } from "./api";
+import { addThunk } from "../api";
 import { Path, Paths } from "./types";
 
 const initialState: Paths = {

@@ -1,7 +1,9 @@
+import { Button } from "@mantine/core";
+
 import { settingsModel } from "@/entities/settings";
 import { useActionCreators, useTypedSelector } from "@/shared/lib/store";
 
-export const Paths = () => {
+export const PathsTab = () => {
 	const {	pathsIds, pathsMap } = useTypedSelector((store) => store.settings.path);
 	const actions = useActionCreators(settingsModel.actions.path);
 
@@ -28,7 +30,8 @@ export const Paths = () => {
 
 	return (
 		<>
-			<button onClick={addHandler}>Add path</button>
+			<Button onClick={addHandler} w="100%">Добавить</Button>
+
 			<ul>{pathsList}</ul>
 		</>
 	);

@@ -2,7 +2,7 @@ import { open } from "@tauri-apps/api/dialog";
 
 import { createTypedAsyncThunk } from "@/shared/lib/store";
 
-import { pathSlice } from "../model";
+import { actions } from "../model";
 
 export const update = createTypedAsyncThunk<void, string>(
 	"settings/path/updateThunk",
@@ -16,6 +16,6 @@ export const update = createTypedAsyncThunk<void, string>(
 
 		if (!path) return;
 
-		dispatch(pathSlice.actions.update({id, newPath: { path }}));
+		dispatch(actions.path.update({id, newPath: { path }}));
 	}
 );
