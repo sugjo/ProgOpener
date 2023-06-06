@@ -7,7 +7,7 @@ const useStyles = createStyles((theme) => ({
 	pathTab: {
 		display: "flex",
 		flexDirection: "column",
-		gap: theme.spacing.lg
+		gap: theme.spacing.xl
 	},
 	path: {
 		display: "grid",
