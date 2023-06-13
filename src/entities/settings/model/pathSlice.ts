@@ -1,44 +1,97 @@
-import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { open } from "@tauri-apps/api/dialog";
 
-import { addThunk } from "../api";
-import { Path, Paths } from "./types";
+import { ImmerStateCreator, tauriStore } from "@/shared/lib/store";
 
-const initialState: Paths = {
-	pathsMap: {},
-	pathsIds: [],
+type Path = {
+	path: string;
+	isActive: boolean;
 };
 
-export const pathSlice = createSlice({
-	name: "settings/path",
-	initialState,
-	reducers: {
-		remove: (state, action: PayloadAction<string>) => {
-			delete state.pathsMap[action.payload];
-			state.pathsIds = state.pathsIds.filter((id) => id !== action.payload);
-		},
-		update: (state, action: PayloadAction<{id: string, newPath: Partial<Path>}>) => {
-			const { id, newPath } = action.payload;
-			state.pathsMap[id] = { ...state.pathsMap[id], ...newPath };
-		},
-		toggle: (
-			{ pathsMap },
-			{ payload: { id, value } }: PayloadAction<{ id: string, value: boolean | undefined }>
-		) => {
-			if (value) {
-				pathsMap[id].isActive = value;
-			} else {
-				pathsMap[id].isActive = !pathsMap[id].isActive;
-			}
-		}
-	},
-	extraReducers: (builder) => {
-		builder
-			.addCase(addThunk.fulfilled, (state, { payload }) => {
-				if (!payload) return;
+export type Paths = {
+	pathsMap: Record<string, Path>;
+	pathsIds: string[];
+}
 
-				const id = crypto.randomUUID();
-				state.pathsIds.push(id);
-				state.pathsMap[id] = { path: payload, isActive: true };
-			});
+type PathsStore = {
+	paths: Paths
+}
+
+type PathsActions = {
+	addPath: () => void;
+	updatePath: (id: string) => void;
+	removePath: (id: string) => void;
+	togglePath: (id: string, value: boolean) => void;
+	_loadPaths: (newState: Paths) => void;
+	_savePaths: () => void;
+}
+
+export type PathsSlice = PathsStore & PathsActions;
+
+export const createPathSlice: ImmerStateCreator<PathsSlice> = (set, get) => ({
+	paths: {
+		pathsMap: {},
+		pathsIds: [],
 	},
+
+	_loadPaths: async (newState) => {
+		if (!newState) return;
+
+		set(({ paths }) => {
+			paths.pathsMap = newState.pathsMap;
+			paths.pathsIds = newState.pathsIds;
+		});
+	},
+
+	_savePaths: () => {
+		tauriStore.set("settings", { pathsStore:{ ...get().paths } });
+		tauriStore.save();
+	},
+
+	addPath: async () => {
+		const path = await open({
+			directory: true,
+			multiple: false
+		}) as string | null;
+
+		if (!path) return;
+
+		const id = crypto.randomUUID();
+
+		set(({ paths }) => {
+			paths.pathsIds.push(id);
+			paths.pathsMap[id] = { path, isActive: true };
+		});
+
+	},
+
+	updatePath: async (id) => {
+		const path = await open({
+			directory: true,
+			multiple: false,
+			defaultPath: get().paths.pathsMap[id].path
+		}) as string | null;
+
+		if (!path) return;
+
+		set(({ paths }) => {
+			paths.pathsMap[id].path = path;
+		});
+	},
+
+	removePath: (id) => {
+		set(({ paths }) => {
+			delete paths.pathsMap[id];
+			paths.pathsIds = paths.pathsIds.filter((pathId) => pathId !== id);
+		});
+	},
+
+	togglePath: (id, value) => {
+		set(({ paths }) => {
+			if (value) {
+				paths.pathsMap[id].isActive = value;
+			} else {
+				paths.pathsMap[id].isActive = !paths.pathsMap[id].isActive;
+			}
+		});
+	}
 });

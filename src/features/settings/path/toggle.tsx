@@ -1,7 +1,7 @@
 import { Checkbox, CheckboxProps } from "@mantine/core";
+import { shallow } from "zustand/shallow";
 
 import { settingsModel } from "@/entities/settings";
-import { useActionCreators, useTypedSelector } from "@/shared/lib/store";
 import { Icon } from "@/shared/ui";
 
 type Props = {
@@ -9,13 +9,15 @@ type Props = {
 }
 
 export const Toggle = ({ id }: Props) => {
-	const pathsMap = useTypedSelector((store) => store.settings.path.pathsMap);
-	const actions = useActionCreators(settingsModel.actions.path);
+	const [ pathsMap, togglePath ] = settingsModel.useStore(
+		(state) => [state.paths.pathsMap, state.togglePath],
+		shallow
+	);
 
-	const { isActive } = pathsMap[id];
+	const isActive = pathsMap[id].isActive;
 
 	const changeHandler = ({ currentTarget: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
-		actions.toggle({ id, value: checked });
+		togglePath(id, checked);
 	};
 
 	const CheckboxIcon: CheckboxProps["icon"] = ({ className }) => (

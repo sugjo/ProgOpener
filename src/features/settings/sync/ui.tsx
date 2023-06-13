@@ -1,6 +1,10 @@
 import { useSync } from "./model";
 
-export const Sync = ({ children }: React.PropsWithChildren) => {
-	useSync();
+interface Props extends React.PropsWithChildren {
+	sync?: boolean;
+}
+
+export const Sync = ({ children, sync = false }: Props) => {
+	useSync(sync);
 	return <>{ children }</>;
 };

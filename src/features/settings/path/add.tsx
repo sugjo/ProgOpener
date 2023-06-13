@@ -1,11 +1,9 @@
 import { Button } from "@mantine/core";
 
 import { settingsModel } from "@/entities/settings";
-import { useActionCreators } from "@/shared/lib/store";
 
 export const Add = () => {
-	const actions = useActionCreators(settingsModel.actions.path);
-	const addHandler = () => actions.addThunk();
+	const addPath = settingsModel.useStore().addPath;
 
-	return <Button onClick={addHandler} w="100%">Добавить</Button>;
+	return <Button onClick={addPath} w="100%">Добавить</Button>;
 };

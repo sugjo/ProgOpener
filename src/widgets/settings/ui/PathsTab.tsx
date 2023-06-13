@@ -1,7 +1,8 @@
 import { createStyles,Flex, Tooltip } from "@mantine/core";
+import { shallow } from "zustand/shallow";
 
+import { settingsModel } from "@/entities/settings";
 import { AddSettingsPath, EditSettingsPath, RemoveSettingsPath, ToggleSettingsPath } from "@/features/settings/path";
-import { useTypedSelector } from "@/shared/lib/store";
 
 const useStyles = createStyles((theme) => ({
 	pathTab: {
@@ -24,7 +25,10 @@ const useStyles = createStyles((theme) => ({
 
 export const PathsTab = () => {
 	const { classes } = useStyles();
-	const {	pathsIds, pathsMap } = useTypedSelector((store) => store.settings.path);
+	const [ pathsIds, pathsMap ] = settingsModel.useStore(
+		(state) => [state.paths.pathsIds, state.paths.pathsMap],
+		shallow
+	);
 
 	return (
 		<div className={classes.pathTab}>

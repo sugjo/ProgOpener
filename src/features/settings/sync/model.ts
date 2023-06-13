@@ -1,22 +1,20 @@
-import { emit } from "@tauri-apps/api/event";
 import { useLayoutEffect } from "react";
 
-import { startAppListening } from "@/shared/lib/listener-middleware";
+import { settingsModel } from "@/entities/settings";
+import { tauriStore } from "@/shared/lib/store";
 
-export const useSync = () => {
+export const useSync = (sync: boolean) => {
+	const settingsInit = settingsModel.useStore().settingsInit;
+
 	useLayoutEffect(() => {
-		const unlisten = startAppListening({
-			predicate: (action, currentState, previousState) => {
-				const isChangedState = currentState !== previousState;
+		settingsInit();
 
-				if (!String(action.type).includes("settings")) return false;
-				if (isChangedState) return true;
-
-				return false;
-			},
-			effect: () => emit("settings_update")
+		const unlistenPathsSync = tauriStore.onChange(() => {
+			sync && settingsInit();
 		});
 
-		return () => unlisten();
-	}, []);
+		return () => {
+			unlistenPathsSync.then((f: () => void) => f());
+		};
+	}, [sync, settingsInit]);
 };

@@ -1,7 +1,6 @@
 import { ActionIcon, createStyles } from "@mantine/core";
 
 import { settingsModel } from "@/entities/settings";
-import { useActionCreators } from "@/shared/lib/store";
 import { Icon } from "@/shared/ui";
 
 type Props = {
@@ -17,12 +16,12 @@ const useStyles = createStyles((theme) => ({
 
 export const Edit = ({ id }: Props) => {
 	const { classes } = useStyles();
-	const actions = useActionCreators(settingsModel.actions.path);
+	const updatePath = settingsModel.useStore().updatePath;
 
-	const updateHandler = (id: string) => () => actions.updateThunk(id);
+	const updateHandler = () => updatePath(id);
 
 	return (
-		<ActionIcon color="blue" variant="light" size="md" onClick={updateHandler(id)}>
+		<ActionIcon color="blue" variant="light" size="md" onClick={updateHandler}>
 			<Icon name="edit" className={classes.editIcon}/>
 		</ActionIcon>
 	);

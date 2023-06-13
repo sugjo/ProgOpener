@@ -18,6 +18,7 @@ fn main() {
     tauri::Builder::default()
         .setup(utils::setup::init)
         .system_tray(core::tray::tray_menu())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .on_system_tray_event(core::tray::on_system_tray_event)
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::CloseRequested { api, .. } => {

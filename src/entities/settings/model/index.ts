@@ -1,14 +1,38 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
 
-import * as pathApi from "../api";
-import { pathSlice } from "./pathSlice";
+import { tauriStore } from "@/shared/lib/store";
 
-export const reducer = persistReducer({ key: "settings", storage }, combineReducers({
-	path: pathSlice.reducer,
-}));
+import { createPathSlice, Paths, PathsSlice } from "./pathSlice";
 
-export const actions = {
-	path: {...pathSlice.actions, ...pathApi},
+
+type SettingsActions = {
+	settingsInit: () => void;
+	settingsSave: () => void;
 };
+
+type SettingsStore = PathsSlice & SettingsActions
+
+type Settings = {
+	pathsStore: Paths;
+};
+
+export const useStore = create<SettingsStore>()(
+	immer((...args) => ({
+		...createPathSlice(...args),
+
+		settingsInit: async () => {
+			const [, get] = args;
+
+			const settings = await tauriStore.get<Settings>("settings");
+			if (!settings) return;
+
+			get()._loadPaths(settings.pathsStore);
+		},
+
+		settingsSave: () => {
+			const [, get] = args;
+			get()._savePaths();
+		},
+	}))
+);

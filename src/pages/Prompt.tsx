@@ -1,7 +1,7 @@
 import { createStyles,Overlay } from "@mantine/core";
 
-import { PromptSync } from "@/features/prompt/sync";
 import { PromptToggle, toggleModel } from "@/features/prompt/toggle";
+import { SettingsSync } from "@/features/settings/sync";
 import { PromptBar } from "@/widgets/prompt-bar";
 
 const useStyles = createStyles((theme) => ({
@@ -22,7 +22,7 @@ export const PromptPage = () => {
 
 	return (
 		<div className={classes.promptContainer}>
-			<PromptSync>
+			<SettingsSync sync>
 				<PromptToggle>
 					<PromptBar />
 					<Overlay
@@ -31,7 +31,7 @@ export const PromptPage = () => {
 						onClick={closeHandler}
 					/>
 				</PromptToggle>
-			</PromptSync>
+			</SettingsSync>
 		</div>
 	);
 };
