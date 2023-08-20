@@ -1,5 +1,7 @@
 import { Button, createStyles } from "@mantine/core";
 
+import { settingsModel } from "@/entities/settings";
+
 const useStyles = createStyles((theme) => ({
 	footer: {
 		display: "flex",
@@ -13,9 +15,11 @@ const useStyles = createStyles((theme) => ({
 export const Footer = () => {
 	const { classes } = useStyles();
 
+	const save = settingsModel.useSettingsPathsStore().savePath;
+
 	return (
 		<footer className={classes.footer}>
-			<Button>Ок</Button>
+			<Button onClick={save}>Ок</Button>
 			<Button
 				color="gray"
 				variant="default"

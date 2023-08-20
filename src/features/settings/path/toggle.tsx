@@ -9,8 +9,8 @@ type Props = {
 }
 
 export const Toggle = ({ id }: Props) => {
-	const [ pathsMap, togglePath ] = settingsModel.useStore(
-		(state) => [state.paths.pathsMap, state.togglePath],
+	const [ pathsMap, togglePath ] = settingsModel.useSettingsPathsStore(
+		(state) => [state.pathsMap, state.togglePath],
 		shallow
 	);
 

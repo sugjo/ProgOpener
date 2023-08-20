@@ -4,17 +4,17 @@ import { settingsModel } from "@/entities/settings";
 import { tauriStore } from "@/shared/lib/store";
 
 export const useSync = (sync: boolean) => {
-	const settingsInit = settingsModel.useStore().settingsInit;
+
+	const pathInit = settingsModel.useSettingsPathsStore().initPath;
 
 	useLayoutEffect(() => {
-		settingsInit();
 
-		const unlistenPathsSync = tauriStore.onChange(() => {
-			sync && settingsInit();
-		});
+		const unlistenPathsSync = tauriStore.onChange(() => sync && pathInit());
+
+		pathInit();
 
 		return () => {
 			unlistenPathsSync.then((f: () => void) => f());
 		};
-	}, [sync, settingsInit]);
+	}, [sync, pathInit]);
 };

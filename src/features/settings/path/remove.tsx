@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
 
 export const Remove = ({ id }: Props) => {
 	const { classes } = useStyles();
-	const removePath = settingsModel.useStore().removePath;
+	const removePath = settingsModel.useSettingsPathsStore().removePath;
 
 	const removeHandler = () => removePath(id);
 

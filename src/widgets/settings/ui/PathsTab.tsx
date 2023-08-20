@@ -25,8 +25,8 @@ const useStyles = createStyles((theme) => ({
 
 export const PathsTab = () => {
 	const { classes } = useStyles();
-	const [ pathsIds, pathsMap ] = settingsModel.useStore(
-		(state) => [state.paths.pathsIds, state.paths.pathsMap],
+	const [ pathsIds, pathsMap ] = settingsModel.useSettingsPathsStore(
+		(state) => [state.pathsIds, state.pathsMap],
 		shallow
 	);
 

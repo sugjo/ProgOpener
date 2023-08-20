@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
 
 export const Edit = ({ id }: Props) => {
 	const { classes } = useStyles();
-	const updatePath = settingsModel.useStore().updatePath;
+	const updatePath = settingsModel.useSettingsPathsStore().updatePath;
 
 	const updateHandler = () => updatePath(id);
 
