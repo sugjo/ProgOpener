@@ -4,22 +4,20 @@
 )]
 
 use std::fs::read;
-
 use tauri::api::path::{resolve_path, BaseDirectory};
 use tauri::http::{Request, ResponseBuilder};
 use tauri::{AppHandle, Manager};
 
 mod core;
-mod utils;
-
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+mod tray;
+mod setup;
 
 fn main() {
     tauri::Builder::default()
-        .setup(utils::setup::init)
-        .system_tray(core::tray::tray_menu())
+        .setup(setup::init)
+        .system_tray(tray::tray_menu())
         .plugin(tauri_plugin_store::Builder::default().build())
-        .on_system_tray_event(core::tray::on_system_tray_event)
+        .on_system_tray_event(tray::on_system_tray_event)
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::CloseRequested { api, .. } => {
                 if event.window().label() != "prompt" {
